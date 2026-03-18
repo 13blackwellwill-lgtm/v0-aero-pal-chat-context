@@ -1,3 +1,4 @@
+// AeroPal - Live Operations Dashboard
 import { AppSidebar } from "@/components/app-sidebar"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { KpiCards } from "@/components/dashboard/kpi-cards"

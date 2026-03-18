@@ -1,5 +1,6 @@
 "use client"
 
+// AeroPal sidebar navigation
 import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
@@ -16,6 +17,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
 
 const navigation = [
   {
@@ -45,6 +47,11 @@ const navigation = [
 
 export function AppSidebar() {
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-white/[0.04] bg-[#08080a]">
@@ -67,7 +74,7 @@ export function AppSidebar() {
             </h3>
             <ul className="space-y-1">
               {group.items.map((item) => {
-                const isActive = pathname === item.href
+                const isActive = mounted && pathname === item.href
                 return (
                   <li key={item.name}>
                     <Link

@@ -25,22 +25,25 @@ interface Alert {
 
 const severityConfig: Record<
   AlertSeverity,
-  { icon: React.ElementType; className: string; bgClassName: string }
+  { icon: React.ElementType; className: string; bgClassName: string; ringClassName: string }
 > = {
   critical: {
     icon: AlertOctagon,
-    className: "text-critical",
-    bgClassName: "bg-critical/10 border-critical/20",
+    className: "text-rose-400",
+    bgClassName: "bg-rose-500/[0.08]",
+    ringClassName: "ring-rose-500/20",
   },
   warning: {
     icon: AlertTriangle,
-    className: "text-warning",
-    bgClassName: "bg-warning/10 border-warning/20",
+    className: "text-amber-400",
+    bgClassName: "bg-amber-500/[0.08]",
+    ringClassName: "ring-amber-500/20",
   },
   info: {
     icon: Info,
-    className: "text-info",
-    bgClassName: "bg-info/10 border-info/20",
+    className: "text-sky-400",
+    bgClassName: "bg-sky-500/[0.08]",
+    ringClassName: "ring-sky-500/20",
   },
 }
 
@@ -106,44 +109,49 @@ function AlertItem({ alert }: { alert: Alert }) {
   return (
     <div
       className={cn(
-        "group relative flex gap-3 rounded-lg border p-3 transition-colors",
+        "group relative flex gap-3 rounded-xl p-3.5 ring-1 transition-all duration-300",
         alert.acknowledged
-          ? "border-border bg-card hover:bg-secondary/30"
-          : config.bgClassName
+          ? "bg-white/[0.015] ring-white/[0.04] hover:bg-white/[0.03]"
+          : cn(config.bgClassName, config.ringClassName)
       )}
     >
+      {/* Inset highlight for unacknowledged */}
+      {!alert.acknowledged && (
+        <div className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]" />
+      )}
+
       <div
         className={cn(
-          "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md",
+          "relative z-10 mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg bg-white/[0.03] ring-1 ring-white/[0.06]",
           config.className,
           !alert.acknowledged && "animate-pulse"
         )}
       >
-        <Icon className="size-4" />
+        <Icon className="size-3.5" strokeWidth={1.5} />
       </div>
-      <div className="min-w-0 flex-1">
+      <div className="relative z-10 min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
           <h4
             className={cn(
               "text-sm font-medium leading-tight",
-              alert.acknowledged ? "text-card-foreground" : config.className
+              alert.acknowledged ? "text-neutral-200" : config.className
             )}
           >
             {alert.title}
           </h4>
-          <div className="flex shrink-0 items-center gap-1 text-xs text-muted-foreground">
-            <Clock className="size-3" />
+          <div className="flex shrink-0 items-center gap-1 text-[10px] text-neutral-500">
+            <Clock className="size-3" strokeWidth={1.5} />
             {alert.timestamp}
           </div>
         </div>
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">
           {alert.description}
         </p>
         {!alert.acknowledged && alert.severity === "critical" && (
           <Button
             size="sm"
             variant="outline"
-            className="mt-2 h-7 border-critical/30 text-xs text-critical hover:bg-critical/10 hover:text-critical"
+            className="mt-3 h-7 rounded-lg border-rose-500/20 bg-rose-500/10 text-[10px] font-medium uppercase tracking-wider text-rose-400 hover:bg-rose-500/20 hover:text-rose-300"
           >
             Acknowledge
           </Button>
@@ -157,23 +165,42 @@ export function AlertsPanel() {
   const unacknowledgedCount = alerts.filter((a) => !a.acknowledged).length
 
   return (
-    <div className="flex h-full flex-col rounded-lg border border-border bg-card">
-      <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div className="flex items-center gap-2">
-          <Bell className="size-4 text-muted-foreground" />
-          <h2 className="text-sm font-semibold text-card-foreground">Alerts</h2>
-          {unacknowledgedCount > 0 && (
-            <span className="flex size-5 items-center justify-center rounded-full bg-critical text-xs font-medium text-critical-foreground">
-              {unacknowledgedCount}
-            </span>
-          )}
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-[24px] bg-white/[0.015] ring-1 ring-white/[0.04] transition-all duration-500 ease-out hover:bg-white/[0.02] hover:ring-white/[0.08]">
+      {/* Gradient overlay on hover */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      
+      {/* Inset highlight */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
+
+      {/* Header */}
+      <div className="relative z-10 flex items-center justify-between border-b border-white/[0.04] px-5 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-white/[0.03] ring-1 ring-white/[0.06]">
+            <Bell className="size-4 text-neutral-400" strokeWidth={1.5} />
+          </div>
+          <div>
+            <h2 className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
+              Alerts
+            </h2>
+            {unacknowledgedCount > 0 && (
+              <p className="text-xs text-rose-400">
+                {unacknowledgedCount} require attention
+              </p>
+            )}
+          </div>
         </div>
-        <Button variant="ghost" size="sm" className="h-7 text-xs text-muted-foreground">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="h-7 rounded-lg text-[10px] uppercase tracking-wider text-neutral-500 hover:bg-white/[0.05] hover:text-neutral-300"
+        >
           View All
-          <ChevronRight className="ml-1 size-3" />
+          <ChevronRight className="ml-1 size-3" strokeWidth={1.5} />
         </Button>
       </div>
-      <div className="flex-1 space-y-2 overflow-y-auto p-3">
+
+      {/* Alerts list */}
+      <div className="relative z-10 flex-1 space-y-2 overflow-y-auto p-4">
         {alerts.map((alert) => (
           <AlertItem key={alert.id} alert={alert} />
         ))}

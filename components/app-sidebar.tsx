@@ -47,22 +47,22 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar">
+    <aside className="flex h-screen w-64 flex-col border-r border-white/[0.04] bg-[#08080a]">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-6">
-        <div className="flex size-8 items-center justify-center rounded-lg bg-info">
-          <Plane className="size-4 text-info-foreground" />
+      <div className="flex h-16 items-center gap-3 border-b border-white/[0.04] px-6">
+        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_20px_-3px_rgba(14,165,233,0.4)]">
+          <Plane className="size-4 text-white" strokeWidth={1.5} />
         </div>
-        <span className="text-lg font-semibold tracking-tight text-sidebar-foreground">
+        <span className="text-lg font-semibold tracking-tight text-white/90">
           AeroPal
         </span>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
+      <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-5">
         {navigation.map((group) => (
           <div key={group.name}>
-            <h3 className="mb-2 px-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            <h3 className="mb-3 px-3 text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-600">
               {group.name}
             </h3>
             <ul className="space-y-1">
@@ -73,16 +73,19 @@ export function AppSidebar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                        "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
                         isActive
-                          ? "bg-sidebar-accent text-sidebar-foreground"
-                          : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                          ? "bg-white/[0.06] text-white ring-1 ring-white/[0.08]"
+                          : "text-neutral-500 hover:bg-white/[0.03] hover:text-neutral-300"
                       )}
                     >
-                      <item.icon className="size-4 shrink-0" />
-                      <span>{item.name}</span>
                       {isActive && (
-                        <ChevronRight className="ml-auto size-4 opacity-50" />
+                        <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.05] to-transparent" />
+                      )}
+                      <item.icon className="relative size-4 shrink-0" strokeWidth={1.5} />
+                      <span className="relative">{item.name}</span>
+                      {isActive && (
+                        <ChevronRight className="relative ml-auto size-4 text-neutral-500" strokeWidth={1.5} />
                       )}
                     </Link>
                   </li>
@@ -94,25 +97,25 @@ export function AppSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="border-t border-sidebar-border p-3">
-        <div className="flex items-center gap-3 rounded-md px-3 py-2">
-          <div className="flex size-8 items-center justify-center rounded-full bg-sidebar-accent">
-            <span className="text-xs font-medium text-sidebar-foreground">JD</span>
+      <div className="border-t border-white/[0.04] p-3">
+        <div className="group flex items-center gap-3 rounded-xl bg-white/[0.02] px-3 py-2.5 ring-1 ring-white/[0.04] transition-all duration-300 hover:bg-white/[0.04] hover:ring-white/[0.08]">
+          <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 ring-1 ring-white/[0.06]">
+            <span className="text-xs font-medium text-white/80">JD</span>
           </div>
           <div className="flex-1 truncate">
-            <p className="truncate text-sm font-medium text-sidebar-foreground">
+            <p className="truncate text-sm font-medium text-neutral-200">
               J. Davidson
             </p>
-            <p className="truncate text-xs text-muted-foreground">
+            <p className="truncate text-[10px] uppercase tracking-wider text-neutral-600">
               Duty Engineer
             </p>
           </div>
-          <div className="flex gap-1">
-            <button className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground">
-              <Bell className="size-4" />
+          <div className="flex gap-0.5">
+            <button className="rounded-lg p-2 text-neutral-600 transition-all duration-200 hover:bg-white/[0.05] hover:text-neutral-300">
+              <Bell className="size-4" strokeWidth={1.5} />
             </button>
-            <button className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground">
-              <Settings className="size-4" />
+            <button className="rounded-lg p-2 text-neutral-600 transition-all duration-200 hover:bg-white/[0.05] hover:text-neutral-300">
+              <Settings className="size-4" strokeWidth={1.5} />
             </button>
           </div>
         </div>

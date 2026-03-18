@@ -42,20 +42,20 @@ interface Flight {
 }
 
 const flightStatusConfig: Record<FlightStatus, { label: string; className: string }> = {
-  "on-time": { label: "On Time", className: "bg-success/10 text-success border-success/20" },
-  delayed: { label: "Delayed", className: "bg-warning/10 text-warning border-warning/20" },
-  boarding: { label: "Boarding", className: "bg-info/10 text-info border-info/20" },
-  departed: { label: "Departed", className: "bg-muted text-muted-foreground border-muted" },
-  arrived: { label: "Arrived", className: "bg-success/10 text-success border-success/20" },
-  aog: { label: "AOG", className: "bg-critical/10 text-critical border-critical/20" },
+  "on-time": { label: "On Time", className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
+  delayed: { label: "Delayed", className: "bg-amber-500/10 text-amber-400 border-amber-500/20" },
+  boarding: { label: "Boarding", className: "bg-sky-500/10 text-sky-400 border-sky-500/20" },
+  departed: { label: "Departed", className: "bg-white/[0.04] text-neutral-400 border-white/[0.06]" },
+  arrived: { label: "Arrived", className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
+  aog: { label: "AOG", className: "bg-rose-500/10 text-rose-400 border-rose-500/20" },
 }
 
 const maintenanceStatusConfig: Record<MaintenanceStatus, { label: string; className: string }> = {
-  clear: { label: "Clear", className: "bg-success/10 text-success border-success/20" },
-  scheduled: { label: "Scheduled", className: "bg-info/10 text-info border-info/20" },
-  "in-progress": { label: "In Progress", className: "bg-warning/10 text-warning border-warning/20" },
-  deferred: { label: "Deferred", className: "bg-muted text-muted-foreground border-muted" },
-  critical: { label: "Critical", className: "bg-critical/10 text-critical border-critical/20" },
+  clear: { label: "Clear", className: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
+  scheduled: { label: "Scheduled", className: "bg-sky-500/10 text-sky-400 border-sky-500/20" },
+  "in-progress": { label: "In Progress", className: "bg-amber-500/10 text-amber-400 border-amber-500/20" },
+  deferred: { label: "Deferred", className: "bg-white/[0.04] text-neutral-400 border-white/[0.06]" },
+  critical: { label: "Critical", className: "bg-rose-500/10 text-rose-400 border-rose-500/20" },
 }
 
 const flights: Flight[] = [
@@ -204,40 +204,57 @@ const flights: Flight[] = [
 
 export function FlightsTable() {
   return (
-    <div className="rounded-lg border border-border bg-card">
-      <div className="flex items-center justify-between border-b border-border px-5 py-4">
+    <div className="group relative overflow-hidden rounded-[24px] bg-white/[0.015] ring-1 ring-white/[0.04] transition-all duration-500 ease-out hover:bg-white/[0.02] hover:ring-white/[0.08]">
+      {/* Gradient overlay on hover */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      
+      {/* Inset highlight */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
+
+      {/* Header */}
+      <div className="relative z-10 flex items-center justify-between border-b border-white/[0.04] px-7 py-5">
         <div>
-          <h2 className="text-base font-semibold text-card-foreground">
+          <h2 className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
             Flight Operations
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-neutral-400">
             Live departures and arrivals
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="h-8 rounded-lg border-white/[0.06] bg-white/[0.02] text-xs text-neutral-400 hover:bg-white/[0.05] hover:text-neutral-300"
+          >
             Filter
           </Button>
-          <Button variant="outline" size="sm">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="h-8 rounded-lg border-white/[0.06] bg-white/[0.02] text-xs text-neutral-400 hover:bg-white/[0.05] hover:text-neutral-300"
+          >
             Export
           </Button>
         </div>
       </div>
-      <div className="overflow-x-auto">
+
+      {/* Table */}
+      <div className="relative z-10 overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="w-[100px]">Flight</TableHead>
-              <TableHead className="w-[90px]">Reg</TableHead>
-              <TableHead className="w-[80px]">Type</TableHead>
-              <TableHead className="w-[140px]">Route</TableHead>
-              <TableHead className="w-[70px]">STD</TableHead>
-              <TableHead className="w-[70px]">ETD</TableHead>
-              <TableHead className="w-[70px]">Gate</TableHead>
-              <TableHead className="w-[100px]">Flight Status</TableHead>
-              <TableHead className="w-[100px]">Maint. Status</TableHead>
-              <TableHead className="w-[120px]">Engineer</TableHead>
-              <TableHead className="w-[70px]">Defects</TableHead>
+            <TableRow className="border-white/[0.04] hover:bg-transparent">
+              <TableHead className="w-[100px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Flight</TableHead>
+              <TableHead className="w-[90px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Reg</TableHead>
+              <TableHead className="w-[80px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Type</TableHead>
+              <TableHead className="w-[140px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Route</TableHead>
+              <TableHead className="w-[70px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">STD</TableHead>
+              <TableHead className="w-[70px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">ETD</TableHead>
+              <TableHead className="w-[70px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Gate</TableHead>
+              <TableHead className="w-[100px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Flight Status</TableHead>
+              <TableHead className="w-[100px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Maint. Status</TableHead>
+              <TableHead className="w-[120px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Engineer</TableHead>
+              <TableHead className="w-[70px] text-[10px] font-medium uppercase tracking-[0.12em] text-neutral-500">Defects</TableHead>
               <TableHead className="w-[50px]"></TableHead>
             </TableRow>
           </TableHeader>
@@ -250,47 +267,49 @@ export function FlightsTable() {
                 <TableRow
                   key={flight.id}
                   className={cn(
-                    "cursor-pointer transition-colors",
-                    flight.flightStatus === "aog" && "bg-critical/5"
+                    "cursor-pointer border-white/[0.03] transition-colors duration-200 hover:bg-white/[0.03]",
+                    flight.flightStatus === "aog" && "bg-rose-500/[0.03]"
                   )}
                 >
-                  <TableCell className="font-medium">
+                  <TableCell className="font-medium text-neutral-200">
                     <div className="flex items-center gap-2">
-                      <Plane className="size-3.5 text-muted-foreground" />
+                      <Plane className="size-3.5 text-neutral-500" strokeWidth={1.5} />
                       {flight.flightNumber}
                     </div>
                   </TableCell>
-                  <TableCell className="font-mono text-xs text-muted-foreground">
+                  <TableCell className="font-mono text-xs text-neutral-500">
                     {flight.registration}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-neutral-400">
                     {flight.aircraftType}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1.5 text-sm">
-                      <span className="font-medium">{flight.origin}</span>
-                      <ArrowRight className="size-3 text-muted-foreground" />
-                      <span className="font-medium">{flight.destination}</span>
+                      <span className="font-medium text-neutral-300">{flight.origin}</span>
+                      <ArrowRight className="size-3 text-neutral-600" strokeWidth={1.5} />
+                      <span className="font-medium text-neutral-300">{flight.destination}</span>
                     </div>
                   </TableCell>
-                  <TableCell className="font-mono text-xs">
+                  <TableCell className="font-mono text-xs text-neutral-400">
                     {flight.std}
                   </TableCell>
                   <TableCell
                     className={cn(
                       "font-mono text-xs",
-                      flight.etd !== flight.std && flight.etd !== "—" && "text-warning"
+                      flight.etd !== flight.std && flight.etd !== "—" 
+                        ? "text-amber-400" 
+                        : "text-neutral-400"
                     )}
                   >
                     {flight.etd}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-neutral-500">
                     {flight.gate}
                   </TableCell>
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className={cn("font-normal", flightStatus.className)}
+                      className={cn("rounded-md font-normal text-[10px] uppercase tracking-wide", flightStatus.className)}
                     >
                       {flightStatus.label}
                     </Badge>
@@ -298,28 +317,28 @@ export function FlightsTable() {
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className={cn("font-normal", maintenanceStatus.className)}
+                      className={cn("rounded-md font-normal text-[10px] uppercase tracking-wide", maintenanceStatus.className)}
                     >
                       {maintenanceStatus.label}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-neutral-500">
                     {flight.assignedEngineer || "—"}
                   </TableCell>
                   <TableCell>
                     {flight.defects > 0 ? (
                       <span
                         className={cn(
-                          "inline-flex size-6 items-center justify-center rounded-full text-xs font-medium",
+                          "inline-flex size-6 items-center justify-center rounded-full text-xs font-medium ring-1",
                           flight.defects >= 3
-                            ? "bg-critical/10 text-critical"
-                            : "bg-warning/10 text-warning"
+                            ? "bg-rose-500/10 text-rose-400 ring-rose-500/20"
+                            : "bg-amber-500/10 text-amber-400 ring-amber-500/20"
                         )}
                       >
                         {flight.defects}
                       </span>
                     ) : (
-                      <span className="text-muted-foreground">—</span>
+                      <span className="text-neutral-600">—</span>
                     )}
                   </TableCell>
                   <TableCell>
@@ -328,16 +347,16 @@ export function FlightsTable() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="size-8 p-0 text-muted-foreground hover:text-foreground"
+                          className="size-8 p-0 text-neutral-500 hover:bg-white/[0.05] hover:text-neutral-300"
                         >
                           <MoreHorizontal className="size-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem>View Details</DropdownMenuItem>
-                        <DropdownMenuItem>Assign Engineer</DropdownMenuItem>
-                        <DropdownMenuItem>View Defects</DropdownMenuItem>
-                        <DropdownMenuItem>Add Note</DropdownMenuItem>
+                      <DropdownMenuContent align="end" className="rounded-xl border-white/[0.06] bg-neutral-900/95 backdrop-blur-xl">
+                        <DropdownMenuItem className="text-neutral-300 focus:bg-white/[0.05] focus:text-neutral-100">View Details</DropdownMenuItem>
+                        <DropdownMenuItem className="text-neutral-300 focus:bg-white/[0.05] focus:text-neutral-100">Assign Engineer</DropdownMenuItem>
+                        <DropdownMenuItem className="text-neutral-300 focus:bg-white/[0.05] focus:text-neutral-100">View Defects</DropdownMenuItem>
+                        <DropdownMenuItem className="text-neutral-300 focus:bg-white/[0.05] focus:text-neutral-100">Add Note</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

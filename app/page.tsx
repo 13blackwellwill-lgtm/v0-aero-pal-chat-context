@@ -8,7 +8,7 @@ import { QuickActions } from "@/components/dashboard/quick-actions"
 
 export default function DashboardPage() {
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-[#0a0a0c]">
       {/* Sidebar */}
       <AppSidebar />
 
@@ -23,8 +23,11 @@ export default function DashboardPage() {
             {/* Quick Actions */}
             <div className="flex items-center justify-between">
               <QuickActions />
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="size-2 animate-pulse rounded-full bg-success" />
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-neutral-600">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                </span>
                 Live data
               </div>
             </div>
@@ -33,18 +36,18 @@ export default function DashboardPage() {
             <KpiCards />
 
             {/* Main Grid */}
-            <div className="grid grid-cols-1 gap-6 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-4">
               {/* Flights Table - Takes 3 columns */}
               <div className="xl:col-span-3">
                 <FlightsTable />
               </div>
 
               {/* Right Sidebar - Alerts & Activity */}
-              <div className="flex flex-col gap-6 xl:col-span-1">
-                <div className="h-[400px]">
+              <div className="flex flex-col gap-5 xl:col-span-1">
+                <div className="h-[420px]">
                   <AlertsPanel />
                 </div>
-                <div className="h-[400px]">
+                <div className="h-[420px]">
                   <ActivityFeed />
                 </div>
               </div>

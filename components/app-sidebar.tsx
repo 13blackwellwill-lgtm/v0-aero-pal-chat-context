@@ -54,25 +54,30 @@ export function AppSidebar() {
   }, [])
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r border-white/[0.04] bg-[#08080a]">
-      {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-white/[0.04] px-6">
-        <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_20px_-3px_rgba(14,165,233,0.4)]">
-          <Plane className="size-4 text-white" strokeWidth={1.5} />
+    <aside className="flex h-screen w-64 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
+      {/* Logo Section */}
+      <div className="flex h-20 items-center gap-4 border-b border-white/[0.06] px-6 shadow-[inset_0_-1px_0_rgba(255,255,255,0.03)]">
+        <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_24px_-4px_rgba(14,165,233,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)]">
+          <Plane className="size-5 text-white" strokeWidth={1.8} />
         </div>
-        <span className="text-lg font-semibold tracking-tight text-white/90">
-          AeroPal
-        </span>
+        <div className="flex flex-col">
+          <span className="text-base font-bold tracking-tight text-white leading-none">
+            AeroPal
+          </span>
+          <span className="text-[9px] uppercase tracking-widest text-neutral-500 font-medium mt-1">
+            Operations
+          </span>
+        </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-5">
+      <nav className="flex-1 space-y-8 overflow-y-auto px-4 py-6">
         {navigation.map((group) => (
           <div key={group.name}>
-            <h3 className="mb-3 px-3 text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-600">
+            <h3 className="mb-4 px-4 text-[9px] font-bold uppercase tracking-wider text-neutral-500/80 leading-tight">
               {group.name}
             </h3>
-            <ul className="space-y-1">
+            <ul className="space-y-2">
               {group.items.map((item) => {
                 const isActive = mounted && pathname === item.href
                 return (
@@ -80,19 +85,19 @@ export function AppSidebar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                        "group relative flex items-center gap-3.5 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 ease-out",
                         isActive
-                          ? "bg-white/[0.06] text-white ring-1 ring-white/[0.08]"
-                          : "text-neutral-500 hover:bg-white/[0.03] hover:text-neutral-300"
+                          ? "bg-white/[0.08] text-white ring-1 ring-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.3)]"
+                          : "text-neutral-400 hover:bg-white/[0.04] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.08]"
                       )}
                     >
                       {isActive && (
-                        <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.05] to-transparent" />
+                        <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-white/[0.08] to-transparent" />
                       )}
-                      <item.icon className="relative size-4 shrink-0" strokeWidth={1.5} />
-                      <span className="relative">{item.name}</span>
+                      <item.icon className="relative size-4.5 shrink-0 text-neutral-400 group-hover:text-neutral-200 transition-colors" strokeWidth={1.6} />
+                      <span className="relative flex-1">{item.name}</span>
                       {isActive && (
-                        <ChevronRight className="relative ml-auto size-4 text-neutral-500" strokeWidth={1.5} />
+                        <ChevronRight className="relative ml-auto size-4 text-sky-400/60" strokeWidth={2} />
                       )}
                     </Link>
                   </li>
@@ -103,26 +108,26 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className="border-t border-white/[0.04] p-3">
-        <div className="group flex items-center gap-3 rounded-xl bg-white/[0.02] px-3 py-2.5 ring-1 ring-white/[0.04] transition-all duration-300 hover:bg-white/[0.04] hover:ring-white/[0.08]">
-          <div className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-neutral-700 to-neutral-800 ring-1 ring-white/[0.06]">
-            <span className="text-xs font-medium text-white/80">JD</span>
+      {/* User Profile Section */}
+      <div className="border-t border-white/[0.06] bg-gradient-to-t from-white/[0.02] to-transparent px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+        <div className="group flex items-center gap-3 rounded-lg bg-white/[0.03] px-4 py-3.5 ring-1 ring-white/[0.06] transition-all duration-300 hover:bg-white/[0.06] hover:ring-white/[0.1] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.2)]">
+          <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
+            <span className="text-xs font-bold text-white/90">JD</span>
           </div>
           <div className="flex-1 truncate">
-            <p className="truncate text-sm font-medium text-neutral-200">
+            <p className="truncate text-sm font-semibold text-neutral-100 leading-tight">
               J. Davidson
             </p>
-            <p className="truncate text-[10px] uppercase tracking-wider text-neutral-600">
+            <p className="truncate text-[9px] uppercase tracking-wider text-neutral-500/80 font-medium mt-1">
               Duty Engineer
             </p>
           </div>
-          <div className="flex gap-0.5">
-            <button className="rounded-lg p-2 text-neutral-600 transition-all duration-200 hover:bg-white/[0.05] hover:text-neutral-300">
-              <Bell className="size-4" strokeWidth={1.5} />
+          <div className="flex gap-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+            <button className="rounded-md p-2 text-neutral-500 transition-all duration-200 hover:bg-white/[0.08] hover:text-neutral-200 hover:ring-1 hover:ring-white/[0.1]">
+              <Bell className="size-4" strokeWidth={1.6} />
             </button>
-            <button className="rounded-lg p-2 text-neutral-600 transition-all duration-200 hover:bg-white/[0.05] hover:text-neutral-300">
-              <Settings className="size-4" strokeWidth={1.5} />
+            <button className="rounded-md p-2 text-neutral-500 transition-all duration-200 hover:bg-white/[0.08] hover:text-neutral-200 hover:ring-1 hover:ring-white/[0.1]">
+              <Settings className="size-4" strokeWidth={1.6} />
             </button>
           </div>
         </div>

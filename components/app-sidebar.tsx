@@ -17,7 +17,6 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
 
 const navigation = [
   {
@@ -47,11 +46,6 @@ const navigation = [
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
@@ -78,31 +72,28 @@ export function AppSidebar() {
               {group.name}
             </h3>
             <ul className="space-y-2">
-              {group.items.map((item) => {
-                const isActive = mounted && pathname === item.href
-                return (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "group relative flex items-center gap-3.5 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 ease-out",
-                        isActive
-                          ? "bg-white/[0.08] text-white ring-1 ring-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.3)]"
-                          : "text-neutral-400 hover:bg-white/[0.04] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.08]"
-                      )}
-                    >
-                      {isActive && (
-                        <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-white/[0.08] to-transparent" />
-                      )}
-                      <item.icon className="relative size-4.5 shrink-0 text-neutral-400 group-hover:text-neutral-200 transition-colors" strokeWidth={1.6} />
-                      <span className="relative flex-1">{item.name}</span>
-                      {isActive && (
-                        <ChevronRight className="relative ml-auto size-4 text-sky-400/60" strokeWidth={2} />
-                      )}
-                    </Link>
-                  </li>
-                )
-              })}
+              {group.items.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "group relative flex items-center gap-3.5 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 ease-out",
+                      pathname === item.href
+                        ? "bg-white/[0.08] text-white ring-1 ring-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.3)]"
+                        : "text-neutral-400 hover:bg-white/[0.04] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.08]"
+                    )}
+                  >
+                    {pathname === item.href && (
+                      <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-white/[0.08] to-transparent" />
+                    )}
+                    <item.icon className="relative size-4.5 shrink-0 text-neutral-400 group-hover:text-neutral-200 transition-colors" strokeWidth={1.6} />
+                    <span className="relative flex-1">{item.name}</span>
+                    {pathname === item.href && (
+                      <ChevronRight className="relative ml-auto size-4 text-sky-400/60" strokeWidth={2} />
+                    )}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         ))}

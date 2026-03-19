@@ -6,8 +6,6 @@ import {
   PlaneTakeoff,
   Users,
   ClipboardList,
-  AlertOctagon,
-  AlertCircle,
   Activity,
 } from "lucide-react"
 
@@ -203,57 +201,28 @@ const operationsData: KpiCardProps[] = [
   },
 ]
 
-// Alert data (AOG and Defects)
-const alertData: KpiCardProps[] = [
-  {
-    title: "Active AOG",
-    value: 2,
-    subtitle: "Aircraft on ground",
-    icon: AlertOctagon,
-    status: "critical",
-  },
-  {
-    title: "Open Defects",
-    value: 12,
-    subtitle: "Pending resolution",
-    icon: AlertCircle,
-    trend: { value: "+1", direction: "up" },
-    status: "warning",
-  },
-]
-
 export function KpiCards() {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-      {/* Consolidated Operations Overview Card */}
-      <div className="relative col-span-1 overflow-hidden rounded-2xl bg-white/[0.015] ring-1 ring-white/[0.05] lg:col-span-2">
-        {/* Multi-layer depth */}
-        <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)]" />
-        <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)]" />
-        
-        {/* Header */}
-        <div className="relative z-10 flex items-center gap-3 border-b border-white/[0.04] px-6 py-4">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-sky-500/10 ring-1 ring-sky-500/20">
-            <Activity className="size-4 text-sky-400" strokeWidth={1.5} />
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold text-white/90">Operations Overview</h3>
-            <p className="text-[10px] uppercase tracking-wider text-neutral-500">Live metrics</p>
-          </div>
+    <div className="relative overflow-hidden rounded-2xl bg-white/[0.015] ring-1 ring-white/[0.05]">
+      {/* Multi-layer depth */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)]" />
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)]" />
+      
+      {/* Header */}
+      <div className="relative z-10 flex items-center gap-3 border-b border-white/[0.04] px-6 py-4">
+        <div className="flex size-8 items-center justify-center rounded-lg bg-sky-500/10 ring-1 ring-sky-500/20">
+          <Activity className="size-4 text-sky-400" strokeWidth={1.5} />
         </div>
-        
-        {/* Inner 4-card grid */}
-        <div className="relative z-10 grid grid-cols-2 gap-3 p-4 lg:grid-cols-4">
-          {operationsData.map((kpi) => (
-            <CompactKpiCard key={kpi.title} {...kpi} />
-          ))}
+        <div>
+          <h3 className="text-sm font-semibold text-white/90">Operations Overview</h3>
+          <p className="text-[10px] uppercase tracking-wider text-neutral-500">Live metrics</p>
         </div>
       </div>
-
-      {/* Alert Cards (AOG & Defects) */}
-      <div className="col-span-1 grid grid-cols-2 gap-4 lg:grid-cols-1">
-        {alertData.map((kpi) => (
-          <AlertKpiCard key={kpi.title} {...kpi} />
+      
+      {/* Inner 4-card grid */}
+      <div className="relative z-10 grid grid-cols-2 gap-3 p-4 lg:grid-cols-4">
+        {operationsData.map((kpi) => (
+          <CompactKpiCard key={kpi.title} {...kpi} />
         ))}
       </div>
     </div>

@@ -1,8 +1,9 @@
-// AeroPal - Live Operations Dashboard v2
+// AeroPal - Live Operations Dashboard v3
 import { AppSidebar } from "@/components/app-sidebar"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { KpiCards } from "@/components/dashboard/kpi-cards"
 import { FlightsTable } from "@/components/dashboard/flights-table"
+import { EventCards } from "@/components/dashboard/event-cards"
 import { AlertsPanel } from "@/components/dashboard/alerts-panel"
 import { ActivityFeed } from "@/components/dashboard/activity-feed"
 import { QuickActions } from "@/components/dashboard/quick-actions"
@@ -52,6 +53,11 @@ export default function DashboardPage() {
                   <ActivityFeed />
                 </div>
               </div>
+            </div>
+
+            {/* Event Cards - Below Flight Operations */}
+            <div className="pt-2">
+              <EventCards />
             </div>
           </div>
         </main>

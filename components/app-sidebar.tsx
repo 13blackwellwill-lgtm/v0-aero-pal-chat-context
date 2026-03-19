@@ -1,6 +1,6 @@
 "use client"
 
-// AeroPal sidebar navigation
+// AeroPal sidebar navigation v2
 import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,

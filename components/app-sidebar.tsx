@@ -17,6 +17,7 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+// AeroPal navigation structure
 const navigation = [
   {
     name: "Operations",
@@ -43,12 +44,16 @@ const navigation = [
   },
 ]
 
+/**
+ * AeroPal Sidebar Navigation Component
+ * Premium dark mode navigation with modern styling
+ */
 export function AppSidebar() {
   const pathname = usePathname()
 
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
-      {/* Logo Section - Premium Design */}
+      {/* Logo Header Section */}
       <div className="flex h-20 items-center gap-4 border-b border-white/[0.06] px-6 shadow-[inset_0_-1px_0_rgba(255,255,255,0.03)]">
         <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_24px_-4px_rgba(14,165,233,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)]">
           <Plane className="size-5 text-white" strokeWidth={1.8} />
@@ -63,7 +68,7 @@ export function AppSidebar() {
         </div>
       </div>
 
-      {/* Navigation Menu */}
+      {/* Main Navigation */}
       <nav className="flex-1 space-y-8 overflow-y-auto px-4 py-6">
         {navigation.map((group) => (
           <div key={group.name}>
@@ -87,7 +92,10 @@ export function AppSidebar() {
                       {isActive && (
                         <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-white/[0.08] to-transparent" />
                       )}
-                      <item.icon className="relative size-4.5 shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-200" strokeWidth={1.6} />
+                      <item.icon 
+                        className="relative size-4.5 shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-200" 
+                        strokeWidth={1.6} 
+                      />
                       <span className="relative flex-1">{item.name}</span>
                       {isActive && (
                         <ChevronRight className="relative ml-auto size-4 text-sky-400/60" strokeWidth={2} />

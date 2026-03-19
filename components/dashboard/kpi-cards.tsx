@@ -31,55 +31,55 @@ function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "d
   }
 
   return (
-    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[20px] bg-white/[0.012] p-5 ring-1 ring-white/[0.045] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.1] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_16px_32px_-8px_rgba(0,0,0,0.5)]">
+    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[18px] bg-white/[0.012] p-3.5 ring-1 ring-white/[0.045] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-white/[0.025] hover:ring-white/[0.1] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_12px_24px_-6px_rgba(0,0,0,0.4)]">
       {/* Gradient overlay on hover */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.04] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
       {/* Dual-layer depth shadows */}
-      <div className="pointer-events-none absolute inset-0 z-0 rounded-[20px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.04),0_6px_16px_-6px_rgba(0,0,0,0.4)]" />
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[18px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.04),0_5px_12px_-4px_rgba(0,0,0,0.35)]" />
 
-      {/* Header section - compact */}
-      <div className="relative z-10 mb-4">
-        <h3 className="mb-1 text-[8px] font-bold uppercase tracking-[0.16em] text-neutral-500/75">{title}</h3>
+      {/* Header section - more compact */}
+      <div className="relative z-10 mb-3">
+        <h3 className="mb-0.5 text-[7px] font-bold uppercase tracking-[0.15em] text-neutral-500/70">{title}</h3>
         {subtitle && (
-          <p className="text-xs leading-snug text-neutral-400/90">{subtitle}</p>
+          <p className="text-[10px] leading-snug text-neutral-400/85">{subtitle}</p>
         )}
       </div>
 
-      {/* Center visualization area with icon - compact */}
-      <div className="relative z-10 flex items-center justify-center py-3">
-        <div className="relative flex h-20 w-full items-center justify-center">
+      {/* Center visualization area with icon - reduced */}
+      <div className="relative z-10 flex items-center justify-center py-2">
+        <div className="relative flex h-14 w-full items-center justify-center">
           {/* Decorative crosshair lines - subtle */}
-          <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/6 to-transparent" />
-          <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-white/6 to-transparent" />
+          <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+          <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
 
           {/* Decorative dots - smaller */}
-          <div className="absolute left-[20%] top-[15%] size-1 rounded-full bg-white/20 ring-0.5 ring-white/10" />
-          <div className="absolute bottom-[25%] right-[16%] size-1.5 rounded-full bg-white/10 ring-0.5 ring-white/5" />
-          <div className="absolute right-[26%] top-[30%] size-0.5 rounded-full bg-white/30" />
+          <div className="absolute left-[20%] top-[15%] size-0.75 rounded-full bg-white/18 ring-0.5 ring-white/8" />
+          <div className="absolute bottom-[25%] right-[16%] size-1 rounded-full bg-white/10 ring-0.5 ring-white/4" />
+          <div className="absolute right-[26%] top-[30%] size-0.5 rounded-full bg-white/28" />
 
-          {/* Central icon container - smaller */}
+          {/* Central icon container - 25% smaller */}
           <div
             className={cn(
-              "z-10 flex size-11 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/10 shadow-[inset_0_1px_2px_rgba(255,255,255,0.06),0_4px_8px_-2px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.08),0_6px_12px_-3px_rgba(0,0,0,0.4)]",
+              "z-10 flex size-8 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/9 shadow-[inset_0_0.5px_1px_rgba(255,255,255,0.05),0_3px_6px_-1px_rgba(0,0,0,0.25)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[inset_0_0.5px_1px_rgba(255,255,255,0.07),0_4px_8px_-2px_rgba(0,0,0,0.3)]",
               statusColors[status]
             )}
           >
-            <Icon className="size-5" strokeWidth={1.4} />
+            <Icon className="size-4" strokeWidth={1.5} />
           </div>
         </div>
       </div>
 
-      {/* Value display - compact */}
-      <div className="relative z-10 mt-4 flex items-baseline gap-2.5">
-        <span className="text-3xl font-bold tracking-tight text-white">{value}</span>
+      {/* Value display - reduced */}
+      <div className="relative z-10 mt-3 flex items-baseline gap-2">
+        <span className="text-2xl font-bold tracking-tight text-white">{value}</span>
         {trend && (
           <span
             className={cn(
-              "text-[10px] font-semibold",
+              "text-[8px] font-semibold",
               trend.direction === "up" && "text-emerald-400/90",
               trend.direction === "down" && "text-rose-400/90",
-              trend.direction === "neutral" && "text-neutral-500/75"
+              trend.direction === "neutral" && "text-neutral-500/70"
             )}
           >
             {trend.value}

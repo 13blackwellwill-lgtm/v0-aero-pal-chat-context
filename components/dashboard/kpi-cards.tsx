@@ -31,55 +31,55 @@ function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "d
   }
 
   return (
-    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[16px] bg-white/[0.012] p-2.5 ring-1 ring-white/[0.045] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-white/[0.025] hover:ring-white/[0.1] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_16px_-4px_rgba(0,0,0,0.3)]">
+    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[16px] bg-white/[0.012] p-3 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.12] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_24px_-6px_rgba(0,0,0,0.4)]">
       {/* Gradient overlay on hover */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.04] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      {/* Dual-layer depth shadows */}
-      <div className="pointer-events-none absolute inset-0 z-0 rounded-[16px] shadow-[inset_0_0.5px_1px_rgba(255,255,255,0.04),0_4px_10px_-3px_rgba(0,0,0,0.3)]" />
+      {/* Multi-layer depth - inset highlight + outer shadow */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[16px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.05),0_6px_14px_-4px_rgba(0,0,0,0.35)]" />
 
-      {/* Header section - ultra compact */}
-      <div className="relative z-10 mb-2">
-        <h3 className="mb-0.5 text-[6.5px] font-bold uppercase tracking-[0.14em] text-neutral-500/65">{title}</h3>
+      {/* Header section - improved readability */}
+      <div className="relative z-10 mb-2.5">
+        <h3 className="mb-1 text-[7.5px] font-bold uppercase tracking-[0.15em] text-neutral-400/75 leading-tight">{title}</h3>
         {subtitle && (
-          <p className="text-[9px] leading-tight text-neutral-400/80">{subtitle}</p>
+          <p className="text-[9.5px] leading-snug text-neutral-400/85">{subtitle}</p>
         )}
       </div>
 
-      {/* Center visualization area with icon - minimal */}
-      <div className="relative z-10 flex items-center justify-center py-1">
-        <div className="relative flex h-9 w-full items-center justify-center">
-          {/* Decorative crosshair lines - subtle */}
-          <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/4 to-transparent" />
-          <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-white/4 to-transparent" />
+      {/* Center visualization area with icon - optimized */}
+      <div className="relative z-10 flex items-center justify-center py-2">
+        <div className="relative flex h-10 w-full items-center justify-center">
+          {/* Decorative crosshair lines - refined */}
+          <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+          <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
 
-          {/* Decorative dots - minimal */}
-          <div className="absolute left-[20%] top-[15%] size-0.5 rounded-full bg-white/15 ring-0.5 ring-white/6" />
-          <div className="absolute bottom-[25%] right-[16%] size-0.75 rounded-full bg-white/8 ring-0.5 ring-white/3" />
-          <div className="absolute right-[26%] top-[30%] size-0.5 rounded-full bg-white/25" />
+          {/* Decorative dots - subtle with depth */}
+          <div className="absolute left-[20%] top-[15%] size-0.75 rounded-full bg-white/18 ring-0.5 ring-white/8 shadow-[0_1px_2px_rgba(0,0,0,0.15)]" />
+          <div className="absolute bottom-[25%] right-[16%] size-1 rounded-full bg-white/10 ring-0.5 ring-white/5 shadow-[0_1px_2px_rgba(0,0,0,0.1)]" />
+          <div className="absolute right-[26%] top-[30%] size-0.5 rounded-full bg-white/28 shadow-[0_0.5px_1px_rgba(0,0,0,0.1)]" />
 
-          {/* Central icon container - 50% smaller */}
+          {/* Central icon container - enhanced with depth */}
           <div
             className={cn(
-              "z-10 flex size-6 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/8 shadow-[inset_0_0.5px_0.5px_rgba(255,255,255,0.04),0_2px_4px_-1px_rgba(0,0,0,0.2)] transition-all duration-500 group-hover:scale-105 group-hover:shadow-[inset_0_0.5px_0.5px_rgba(255,255,255,0.06),0_3px_6px_-1px_rgba(0,0,0,0.25)]",
+              "z-10 flex size-7 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/10 shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.06),0_3px_8px_-1px_rgba(0,0,0,0.25)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.08),0_5px_12px_-2px_rgba(0,0,0,0.3)]",
               statusColors[status]
             )}
           >
-            <Icon className="size-3.5" strokeWidth={1.6} />
+            <Icon className="size-4" strokeWidth={1.5} />
           </div>
         </div>
       </div>
 
-      {/* Value display - compact */}
-      <div className="relative z-10 mt-2 flex items-baseline gap-1.5">
-        <span className="text-lg font-bold tracking-tight text-white">{value}</span>
+      {/* Value display - improved hierarchy */}
+      <div className="relative z-10 mt-2.5 flex items-baseline gap-2">
+        <span className="text-xl font-bold tracking-tight text-white leading-none">{value}</span>
         {trend && (
           <span
             className={cn(
-              "text-[7px] font-semibold",
-              trend.direction === "up" && "text-emerald-400/90",
-              trend.direction === "down" && "text-rose-400/90",
-              trend.direction === "neutral" && "text-neutral-500/65"
+              "text-[7.5px] font-semibold leading-none",
+              trend.direction === "up" && "text-emerald-400/95",
+              trend.direction === "down" && "text-rose-400/95",
+              trend.direction === "neutral" && "text-neutral-500/70"
             )}
           >
             {trend.value}

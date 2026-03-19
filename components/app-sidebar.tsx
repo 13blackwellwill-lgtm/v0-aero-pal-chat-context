@@ -1,6 +1,8 @@
 "use client"
 
-// AeroPal sidebar navigation - modern premium design
+// AeroPal Sidebar Navigation Component
+// Last updated: Force rebuild for hydration fix
+
 import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
@@ -58,7 +60,7 @@ export function AppSidebar() {
           <span className="text-base font-bold tracking-tight text-white leading-none">
             AeroPal
           </span>
-          <span className="text-[9px] uppercase tracking-widest text-neutral-500 font-medium mt-1">
+          <span className="mt-1 text-[9px] font-medium uppercase tracking-widest text-neutral-500">
             Operations
           </span>
         </div>
@@ -86,7 +88,7 @@ export function AppSidebar() {
                     {pathname === item.href && (
                       <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-white/[0.08] to-transparent" />
                     )}
-                    <item.icon className="relative size-4.5 shrink-0 text-neutral-400 group-hover:text-neutral-200 transition-colors" strokeWidth={1.6} />
+                    <item.icon className="relative size-4.5 shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-200" strokeWidth={1.6} />
                     <span className="relative flex-1">{item.name}</span>
                     {pathname === item.href && (
                       <ChevronRight className="relative ml-auto size-4 text-sky-400/60" strokeWidth={2} />
@@ -106,10 +108,10 @@ export function AppSidebar() {
             <span className="text-xs font-bold text-white/90">JD</span>
           </div>
           <div className="flex-1 truncate">
-            <p className="truncate text-sm font-semibold text-neutral-100 leading-tight">
+            <p className="truncate text-sm font-semibold leading-tight text-neutral-100">
               J. Davidson
             </p>
-            <p className="truncate text-[9px] uppercase tracking-wider text-neutral-500/80 font-medium mt-1">
+            <p className="mt-1 truncate text-[9px] font-medium uppercase tracking-wider text-neutral-500/80">
               Duty Engineer
             </p>
           </div>

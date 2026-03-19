@@ -21,58 +21,69 @@ interface KpiCardProps {
   status?: "default" | "success" | "warning" | "critical"
 }
 
-// Compact inner card for the consolidated operations overview
+// Compact inner card for the consolidated operations overview - matches reference design exactly
 function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "default" }: KpiCardProps) {
   const statusColors = {
-    default: "text-neutral-400",
+    default: "text-neutral-300",
     success: "text-emerald-400",
     warning: "text-amber-400",
     critical: "text-rose-400",
   }
 
   return (
-    <div className="group relative flex flex-col rounded-xl bg-white/[0.02] p-5 ring-1 ring-white/[0.04] transition-all duration-300 hover:bg-white/[0.04] hover:ring-white/[0.08]">
-      {/* Inner highlight */}
-      <div className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]" />
+    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[24px] bg-white/[0.015] p-7 ring-1 ring-white/[0.04] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.02] hover:ring-white/[0.08] hover:shadow-[0_16px_32px_-8px_rgba(0,0,0,0.5)] min-h-[200px]">
+      {/* Gradient overlay on hover */}
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      <div className="relative z-10">
-        {/* Icon and title row */}
-        <div className="mb-4 flex items-center gap-3">
+      {/* Inset shadow highlight */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
+
+      {/* Header section */}
+      <div className="relative z-10 mb-6">
+        <h3 className="mb-1.5 text-xs font-medium uppercase tracking-[0.15em] text-neutral-500">{title}</h3>
+        {subtitle && (
+          <p className="text-sm leading-relaxed text-neutral-400">{subtitle}</p>
+        )}
+      </div>
+
+      {/* Center visualization area with icon */}
+      <div className="relative z-10 flex flex-1 items-center justify-center">
+        <div className="relative flex h-full w-full items-center justify-center">
+          {/* Decorative crosshair lines */}
+          <div className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+
+          {/* Decorative dots */}
+          <div className="absolute left-[20%] top-[20%] size-1.5 rounded-full bg-white/20 ring-1 ring-white/10" />
+          <div className="absolute bottom-[30%] right-[15%] size-2 rounded-full bg-white/10 ring-1 ring-white/5" />
+          <div className="absolute right-[25%] top-[35%] size-1 rounded-full bg-white/30" />
+
+          {/* Central icon container */}
           <div
             className={cn(
-              "flex size-9 items-center justify-center rounded-lg bg-white/[0.04] ring-1 ring-white/[0.06] transition-all duration-300 group-hover:bg-white/[0.06]",
+              "z-10 flex size-12 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-transform duration-500 group-hover:scale-110",
               statusColors[status]
             )}
           >
-            <Icon className="size-4" strokeWidth={1.5} />
+            <Icon className="size-5" strokeWidth={1.5} />
           </div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500 leading-tight">
-            {title}
-          </p>
         </div>
+      </div>
 
-        {/* Value */}
-        <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-bold tracking-tight text-white leading-none">
-            {value}
+      {/* Value display at bottom */}
+      <div className="relative z-10 mt-6 flex items-baseline gap-2">
+        <span className="text-3xl font-semibold tracking-tight text-white">{value}</span>
+        {trend && (
+          <span
+            className={cn(
+              "text-xs font-medium",
+              trend.direction === "up" && "text-emerald-400",
+              trend.direction === "down" && "text-rose-400",
+              trend.direction === "neutral" && "text-neutral-500"
+            )}
+          >
+            {trend.value}
           </span>
-          {trend && (
-            <span
-              className={cn(
-                "text-[11px] font-semibold",
-                trend.direction === "up" && "text-emerald-400/90",
-                trend.direction === "down" && "text-rose-400/90",
-                trend.direction === "neutral" && "text-neutral-500"
-              )}
-            >
-              {trend.value}
-            </span>
-          )}
-        </div>
-
-        {/* Subtitle */}
-        {subtitle && (
-          <p className="mt-2 text-xs leading-relaxed text-neutral-500">{subtitle}</p>
         )}
       </div>
     </div>
@@ -220,7 +231,7 @@ export function KpiCards() {
       </div>
       
       {/* Inner 4-card grid */}
-      <div className="relative z-10 grid grid-cols-2 gap-3 p-4 lg:grid-cols-4">
+      <div className="relative z-10 grid grid-cols-2 gap-4 p-5 lg:grid-cols-4">
         {operationsData.map((kpi) => (
           <CompactKpiCard key={kpi.title} {...kpi} />
         ))}

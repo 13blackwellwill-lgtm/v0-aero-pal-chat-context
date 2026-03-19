@@ -17,63 +17,38 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-/**
- * Navigation item structure for sidebar menu
- */
-interface NavItem {
-  label: string
-  path: string
-  icon: React.ElementType
-}
-
-/**
- * Navigation group structure for organizing menu items
- */
-interface NavGroup {
-  label: string
-  items: NavItem[]
-}
-
-/**
- * Complete navigation structure for AeroPal sidebar
- * Organized by operational areas: Operations, Fleet, and Resources
- */
-const NAVIGATION: NavGroup[] = [
+const NAV_GROUPS = [
   {
-    label: "Operations",
-    items: [
-      { label: "Dashboard", path: "/", icon: LayoutDashboard },
-      { label: "Live Map", path: "/map", icon: Map },
-      { label: "Schedule", path: "/schedule", icon: Calendar },
+    title: "Operations",
+    links: [
+      { name: "Dashboard", href: "/", icon: LayoutDashboard },
+      { name: "Live Map", href: "/map", icon: Map },
+      { name: "Schedule", href: "/schedule", icon: Calendar },
     ],
   },
   {
-    label: "Fleet",
-    items: [
-      { label: "Aircraft", path: "/aircraft", icon: Plane },
-      { label: "Defects", path: "/defects", icon: AlertTriangle },
-      { label: "Maintenance", path: "/maintenance", icon: Wrench },
+    title: "Fleet",
+    links: [
+      { name: "Aircraft", href: "/aircraft", icon: Plane },
+      { name: "Defects", href: "/defects", icon: AlertTriangle },
+      { name: "Maintenance", href: "/maintenance", icon: Wrench },
     ],
   },
   {
-    label: "Resources",
-    items: [
-      { label: "Engineers", path: "/engineers", icon: Users },
-      { label: "Reports", path: "/reports", icon: FileText },
+    title: "Resources",
+    links: [
+      { name: "Engineers", href: "/engineers", icon: Users },
+      { name: "Reports", href: "/reports", icon: FileText },
     ],
   },
 ]
 
-/**
- * Premium sidebar navigation component for AeroPal
- * Features elegant dark mode design with gradient backgrounds and depth layers
- */
 export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
-      {/* Logo and Branding Header */}
+    <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
+      {/* Logo Header */}
       <div className="flex h-20 items-center gap-4 border-b border-white/[0.06] px-6 shadow-[inset_0_-1px_0_rgba(255,255,255,0.03)]">
         <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_24px_-4px_rgba(14,165,233,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)]">
           <Plane className="size-5 text-white" strokeWidth={1.8} />
@@ -88,22 +63,22 @@ export function AppSidebar() {
         </div>
       </div>
 
-      {/* Main Navigation */}
+      {/* Navigation */}
       <nav className="flex-1 space-y-8 overflow-y-auto px-4 py-6">
-        {NAVIGATION.map((group) => (
-          <div key={group.label}>
+        {NAV_GROUPS.map((group) => (
+          <div key={group.title}>
             <h3 className="mb-4 px-4 text-[9px] font-bold uppercase tracking-wider text-neutral-500/80 leading-tight">
-              {group.label}
+              {group.title}
             </h3>
             <ul className="space-y-2">
-              {group.items.map((item) => {
-                const isActive = pathname === item.path
-                const Icon = item.icon
+              {group.links.map((link) => {
+                const isActive = pathname === link.href
+                const LinkIcon = link.icon
 
                 return (
-                  <li key={item.path}>
+                  <li key={link.href}>
                     <Link
-                      href={item.path}
+                      href={link.href}
                       className={cn(
                         "group relative flex items-center gap-3.5 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 ease-out",
                         isActive
@@ -114,11 +89,11 @@ export function AppSidebar() {
                       {isActive && (
                         <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-r from-white/[0.08] to-transparent" />
                       )}
-                      <Icon
+                      <LinkIcon
                         className="relative size-4.5 shrink-0 text-neutral-400 transition-colors group-hover:text-neutral-200"
                         strokeWidth={1.6}
                       />
-                      <span className="relative flex-1">{item.label}</span>
+                      <span className="relative flex-1">{link.name}</span>
                       {isActive && (
                         <ChevronRight className="relative ml-auto size-4 text-sky-400/60" strokeWidth={2} />
                       )}
@@ -131,7 +106,7 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      {/* User Profile Footer Section */}
+      {/* User Profile Footer */}
       <div className="border-t border-white/[0.06] bg-gradient-to-t from-white/[0.02] to-transparent px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
         <div className="group flex items-center gap-3 rounded-lg bg-white/[0.03] px-4 py-3.5 ring-1 ring-white/[0.06] transition-all duration-300 hover:bg-white/[0.06] hover:ring-white/[0.1] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.2)]">
           <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">

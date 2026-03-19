@@ -31,45 +31,45 @@ function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "d
   }
 
   return (
-    <div className="group relative flex flex-col justify-center items-center overflow-hidden rounded-[16px] bg-white/[0.012] p-3 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.12] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_24px_-6px_rgba(0,0,0,0.4)]">
+    <div className="group relative flex flex-col justify-center items-center overflow-hidden rounded-[18px] bg-white/[0.01] p-5 ring-1 ring-white/[0.06] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:bg-white/[0.03] hover:ring-white/[0.14] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_16px_32px_-8px_rgba(0,0,0,0.5)]">
       {/* Gradient overlay on hover */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      {/* Multi-layer depth */}
-      <div className="pointer-events-none absolute inset-0 z-0 rounded-[16px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.05),0_6px_14px_-4px_rgba(0,0,0,0.35)]" />
+      {/* Multi-layer depth shadows */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[18px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.06),0_8px_18px_-6px_rgba(0,0,0,0.4)]" />
 
-      {/* Header section - compact */}
-      <div className="relative z-10 w-full mb-auto text-center">
-        <h3 className="text-[7px] font-bold uppercase tracking-[0.15em] text-neutral-400/65 leading-tight mb-0.5">{title}</h3>
+      {/* Header section - improved spacing and typography */}
+      <div className="relative z-10 w-full mb-3 text-center">
+        <h3 className="text-[8px] font-bold uppercase tracking-[0.16em] text-neutral-500/70 leading-tight mb-1.5">{title}</h3>
         {subtitle && (
-          <p className="text-[8.5px] leading-tight text-neutral-400/75">{subtitle}</p>
+          <p className="text-[9.5px] leading-relaxed text-neutral-400/80">{subtitle}</p>
         )}
       </div>
 
-      {/* Metric display - PRIMARY FOCUS */}
-      <div className="relative z-10 flex flex-col items-center justify-center py-1.5 flex-1">
+      {/* Metric display - PRIMARY FOCUS with enhanced spacing */}
+      <div className="relative z-10 flex flex-col items-center justify-center py-3 flex-1">
         {/* Small icon positioned subtly at top right of metric area */}
-        <div className="absolute top-0 right-0 opacity-60 transition-opacity duration-500 group-hover:opacity-80">
+        <div className="absolute top-1 right-1 opacity-50 transition-opacity duration-500 group-hover:opacity-75">
           <div
             className={cn(
-              "flex size-5 items-center justify-center rounded-full bg-white/[0.03] ring-1 ring-white/[0.08] transition-all duration-500",
+              "flex size-6 items-center justify-center rounded-lg bg-white/[0.04] ring-1 ring-white/[0.1] shadow-[inset_0_0.5px_1px_rgba(255,255,255,0.05)] transition-all duration-500",
               statusColors[status]
             )}
           >
-            <Icon className="size-3" strokeWidth={1.5} />
+            <Icon className="size-3.5" strokeWidth={1.5} />
           </div>
         </div>
 
         {/* Large, prominent metric value - THE FOCAL POINT */}
-        <div className="flex items-baseline gap-1.5">
-          <span className="text-3xl font-bold tracking-tight text-white leading-none">{value}</span>
+        <div className="flex items-baseline gap-2">
+          <span className="text-4xl font-bold tracking-tight text-white leading-tight">{value}</span>
           {trend && (
             <span
               className={cn(
-                "text-[7px] font-semibold leading-none",
+                "text-[8px] font-semibold leading-none",
                 trend.direction === "up" && "text-emerald-400/95",
                 trend.direction === "down" && "text-rose-400/95",
-                trend.direction === "neutral" && "text-neutral-500/65"
+                trend.direction === "neutral" && "text-neutral-500/70"
               )}
             >
               {trend.value}
@@ -222,7 +222,7 @@ export function KpiCards() {
       </div>
       
       {/* Inner 4-card grid */}
-      <div className="relative z-10 grid grid-cols-2 gap-4 p-5 lg:grid-cols-4">
+      <div className="relative z-10 grid grid-cols-2 gap-5 p-6 lg:grid-cols-4">
         {operationsData.map((kpi) => (
           <CompactKpiCard key={kpi.title} {...kpi} />
         ))}

@@ -31,55 +31,55 @@ function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "d
   }
 
   return (
-    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[24px] bg-white/[0.015] p-7 ring-1 ring-white/[0.04] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.02] hover:ring-white/[0.08] hover:shadow-[0_16px_32px_-8px_rgba(0,0,0,0.5)] min-h-[200px]">
+    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[24px] bg-white/[0.012] p-8 ring-1 ring-white/[0.045] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:bg-white/[0.025] hover:ring-white/[0.1] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_20px_40px_-12px_rgba(0,0,0,0.6)] min-h-[220px]">
       {/* Gradient overlay on hover */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.04] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      {/* Inset shadow highlight */}
-      <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
+      {/* Dual-layer depth shadows */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.04),0_8px_24px_-8px_rgba(0,0,0,0.45)]" />
 
-      {/* Header section */}
-      <div className="relative z-10 mb-6">
-        <h3 className="mb-1.5 text-xs font-medium uppercase tracking-[0.15em] text-neutral-500">{title}</h3>
+      {/* Header section with improved typography */}
+      <div className="relative z-10 mb-7">
+        <h3 className="mb-2 text-[9px] font-bold uppercase tracking-[0.18em] text-neutral-500/80 leading-tight">{title}</h3>
         {subtitle && (
-          <p className="text-sm leading-relaxed text-neutral-400">{subtitle}</p>
+          <p className="text-sm font-medium leading-[1.6] text-neutral-400/95">{subtitle}</p>
         )}
       </div>
 
       {/* Center visualization area with icon */}
-      <div className="relative z-10 flex flex-1 items-center justify-center">
+      <div className="relative z-10 flex flex-1 items-center justify-center py-4">
         <div className="relative flex h-full w-full items-center justify-center">
           {/* Decorative crosshair lines */}
-          <div className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+          <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+          <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-white/8 to-transparent" />
 
-          {/* Decorative dots */}
-          <div className="absolute left-[20%] top-[20%] size-1.5 rounded-full bg-white/20 ring-1 ring-white/10" />
-          <div className="absolute bottom-[30%] right-[15%] size-2 rounded-full bg-white/10 ring-1 ring-white/5" />
-          <div className="absolute right-[25%] top-[35%] size-1 rounded-full bg-white/30" />
+          {/* Decorative dots with refined styling */}
+          <div className="absolute left-[18%] top-[18%] size-1.5 rounded-full bg-white/25 ring-1 ring-white/15 shadow-[0_2px_4px_rgba(0,0,0,0.2)]" />
+          <div className="absolute bottom-[28%] right-[14%] size-2 rounded-full bg-white/12 ring-1 ring-white/8 shadow-[0_2px_4px_rgba(0,0,0,0.15)]" />
+          <div className="absolute right-[24%] top-[32%] size-1 rounded-full bg-white/35 shadow-[0_1px_2px_rgba(0,0,0,0.2)]" />
 
-          {/* Central icon container */}
+          {/* Central icon container with enhanced depth */}
           <div
             className={cn(
-              "z-10 flex size-12 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-transform duration-500 group-hover:scale-110",
+              "z-10 flex size-14 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/12 shadow-[inset_0_2px_4px_rgba(255,255,255,0.08),0_8px_16px_-4px_rgba(0,0,0,0.4)] transition-all duration-500 group-hover:scale-115 group-hover:shadow-[inset_0_2px_4px_rgba(255,255,255,0.12),0_12px_24px_-6px_rgba(0,0,0,0.5)]",
               statusColors[status]
             )}
           >
-            <Icon className="size-5" strokeWidth={1.5} />
+            <Icon className="size-6" strokeWidth={1.4} />
           </div>
         </div>
       </div>
 
-      {/* Value display at bottom */}
-      <div className="relative z-10 mt-6 flex items-baseline gap-2">
-        <span className="text-3xl font-semibold tracking-tight text-white">{value}</span>
+      {/* Value display at bottom with improved hierarchy */}
+      <div className="relative z-10 mt-7 flex items-baseline gap-3">
+        <span className="text-4xl font-bold tracking-tight text-white leading-tight">{value}</span>
         {trend && (
           <span
             className={cn(
-              "text-xs font-medium",
-              trend.direction === "up" && "text-emerald-400",
-              trend.direction === "down" && "text-rose-400",
-              trend.direction === "neutral" && "text-neutral-500"
+              "text-xs font-semibold leading-none",
+              trend.direction === "up" && "text-emerald-400/95",
+              trend.direction === "down" && "text-rose-400/95",
+              trend.direction === "neutral" && "text-neutral-500/80"
             )}
           >
             {trend.value}

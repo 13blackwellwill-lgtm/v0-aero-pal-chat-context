@@ -39,35 +39,35 @@ function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "d
       <div className="pointer-events-none absolute inset-0 z-0 rounded-[18px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.06),0_8px_18px_-6px_rgba(0,0,0,0.4)]" />
 
       {/* Top section: Header LEFT ALIGNED + Icon RIGHT */}
-      <div className="relative z-10 flex items-start justify-between gap-4 mb-4">
+      <div className="relative z-10 flex items-start justify-between gap-4 mb-5">
         {/* Header section - LEFT ALIGNED */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-[8px] font-bold uppercase tracking-[0.16em] text-neutral-500/70 leading-tight mb-1.5">{title}</h3>
+          <h3 className="text-[7.5px] font-bold uppercase tracking-[0.18em] text-neutral-500/65 leading-tight mb-2">{title}</h3>
           {subtitle && (
-            <p className="text-[9.5px] leading-relaxed text-neutral-400/80">{subtitle}</p>
+            <p className="text-[10px] leading-[1.5] text-neutral-400/85">{subtitle}</p>
           )}
         </div>
 
         {/* Icon positioned TOP RIGHT - LARGER */}
-        <div className="shrink-0 opacity-60 transition-opacity duration-500 group-hover:opacity-85">
+        <div className="shrink-0 opacity-55 transition-opacity duration-500 group-hover:opacity-80">
           <div
             className={cn(
-              "flex size-9 items-center justify-center rounded-lg bg-white/[0.04] ring-1 ring-white/[0.1] shadow-[inset_0_0.5px_1px_rgba(255,255,255,0.05)] transition-all duration-500 group-hover:bg-white/[0.06]",
+              "flex size-10 items-center justify-center rounded-lg bg-white/[0.05] ring-1 ring-white/[0.12] shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.07)] transition-all duration-500 group-hover:bg-white/[0.08]",
               statusColors[status]
             )}
           >
-            <Icon className="size-5" strokeWidth={1.5} />
+            <Icon className="size-5.5" strokeWidth={1.5} />
           </div>
         </div>
       </div>
 
       {/* Bottom section: Metric display */}
-      <div className="relative z-10 flex items-baseline gap-2">
-        <span className="text-3.5xl font-bold tracking-tight text-white leading-tight">{value}</span>
+      <div className="relative z-10 flex items-baseline gap-2.5">
+        <span className="text-4xl font-bold tracking-tight text-white leading-none">{value}</span>
         {trend && (
           <span
             className={cn(
-              "text-[8px] font-semibold leading-none",
+              "text-[7.5px] font-semibold leading-none",
               trend.direction === "up" && "text-emerald-400/95",
               trend.direction === "down" && "text-rose-400/95",
               trend.direction === "neutral" && "text-neutral-500/70"

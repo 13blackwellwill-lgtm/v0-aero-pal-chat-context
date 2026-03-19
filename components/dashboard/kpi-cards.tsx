@@ -40,45 +40,48 @@ function KpiCard({ title, value, subtitle, icon: Icon, trend, status = "default"
   return (
     <div
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-[20px] bg-white/[0.02] p-6 ring-1 ring-white/[0.06] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.04] hover:ring-white/[0.1] hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)]",
-        status === "critical" && "ring-rose-500/20 hover:ring-rose-500/30",
+        "group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white/[0.018] p-7 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:bg-white/[0.028] hover:ring-white/[0.09] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_20px_50px_-12px_rgba(0,0,0,0.8)]",
+        status === "critical" && "ring-rose-500/25 hover:ring-rose-500/40",
         statusGlow[status]
       )}
     >
-      {/* Gradient overlay on hover */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      {/* Multi-layer background depth */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      {/* Inset highlight */}
-      <div className="pointer-events-none absolute inset-0 z-0 rounded-[20px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]" />
+      {/* Inner border highlight for depth */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.06)]" />
+      
+      {/* Outer depth shadow */}
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[0_8px_24px_-8px_rgba(0,0,0,0.4)]" />
 
       <div className="relative z-10">
         {/* Header with icon */}
-        <div className="mb-5 flex items-start justify-between">
-          <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
+        <div className="mb-6 flex items-start justify-between">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 leading-tight">
             {title}
           </p>
           <div
             className={cn(
-              "flex size-10 items-center justify-center rounded-full bg-white/[0.03] ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-transform duration-500 group-hover:scale-110",
+              "flex size-11 items-center justify-center rounded-xl bg-white/[0.04] ring-1 ring-white/[0.08] shadow-[inset_0_1px_2px_rgba(255,255,255,0.08),0_4px_12px_-4px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-115 group-hover:bg-white/[0.06] group-hover:ring-white/[0.12]",
               statusColors[status]
             )}
           >
-            <Icon className="size-[18px]" strokeWidth={1.5} />
+            <Icon className="size-5" strokeWidth={1.4} />
           </div>
         </div>
 
-        {/* Value */}
-        <div className="flex items-baseline gap-2">
-          <span className="text-4xl font-semibold tracking-tight text-white/90">
+        {/* Value with improved hierarchy */}
+        <div className="flex items-baseline gap-2.5">
+          <span className="text-5xl font-bold tracking-tight text-white leading-none">
             {value}
           </span>
           {trend && (
             <span
               className={cn(
-                "text-xs font-medium",
-                trend.direction === "up" && "text-emerald-400",
-                trend.direction === "down" && "text-rose-400",
-                trend.direction === "neutral" && "text-neutral-500"
+                "text-xs font-semibold",
+                trend.direction === "up" && "text-emerald-400/90",
+                trend.direction === "down" && "text-rose-400/90",
+                trend.direction === "neutral" && "text-neutral-400"
               )}
             >
               {trend.value}
@@ -86,15 +89,15 @@ function KpiCard({ title, value, subtitle, icon: Icon, trend, status = "default"
           )}
         </div>
 
-        {/* Subtitle */}
+        {/* Subtitle with improved readability */}
         {subtitle && (
-          <p className="mt-2 text-sm text-neutral-500">{subtitle}</p>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-500/90">{subtitle}</p>
         )}
       </div>
 
-      {/* Decorative elements */}
-      <div className="pointer-events-none absolute bottom-0 right-0 h-24 w-24 opacity-[0.03]">
-        <Icon className="size-full" strokeWidth={0.5} />
+      {/* Subtle decorative elements */}
+      <div className="pointer-events-none absolute bottom-0 right-0 h-32 w-32 opacity-[0.015]">
+        <Icon className="size-full" strokeWidth={0.4} />
       </div>
     </div>
   )

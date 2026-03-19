@@ -17,17 +17,27 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+/**
+ * Navigation item structure for sidebar menu
+ */
 interface NavItem {
   label: string
   path: string
   icon: React.ElementType
 }
 
+/**
+ * Navigation group structure for organizing menu items
+ */
 interface NavGroup {
   label: string
   items: NavItem[]
 }
 
+/**
+ * Complete navigation structure for AeroPal sidebar
+ * Organized by operational areas: Operations, Fleet, and Resources
+ */
 const NAVIGATION: NavGroup[] = [
   {
     label: "Operations",
@@ -54,12 +64,16 @@ const NAVIGATION: NavGroup[] = [
   },
 ]
 
+/**
+ * Premium sidebar navigation component for AeroPal
+ * Features elegant dark mode design with gradient backgrounds and depth layers
+ */
 export function AppSidebar() {
   const pathname = usePathname()
 
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
-      {/* Premium Logo Header Section */}
+      {/* Logo and Branding Header */}
       <div className="flex h-20 items-center gap-4 border-b border-white/[0.06] px-6 shadow-[inset_0_-1px_0_rgba(255,255,255,0.03)]">
         <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_24px_-4px_rgba(14,165,233,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)]">
           <Plane className="size-5 text-white" strokeWidth={1.8} />
@@ -74,7 +88,7 @@ export function AppSidebar() {
         </div>
       </div>
 
-      {/* Main Navigation Section */}
+      {/* Main Navigation */}
       <nav className="flex-1 space-y-8 overflow-y-auto px-4 py-6">
         {NAVIGATION.map((group) => (
           <div key={group.label}>
@@ -117,7 +131,7 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      {/* Premium User Profile Footer Section */}
+      {/* User Profile Footer Section */}
       <div className="border-t border-white/[0.06] bg-gradient-to-t from-white/[0.02] to-transparent px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
         <div className="group flex items-center gap-3 rounded-lg bg-white/[0.03] px-4 py-3.5 ring-1 ring-white/[0.06] transition-all duration-300 hover:bg-white/[0.06] hover:ring-white/[0.1] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.2)]">
           <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">

@@ -31,60 +31,51 @@ function CompactKpiCard({ title, value, subtitle, icon: Icon, trend, status = "d
   }
 
   return (
-    <div className="group relative flex flex-col justify-between overflow-hidden rounded-[16px] bg-white/[0.012] p-3 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.12] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_24px_-6px_rgba(0,0,0,0.4)]">
+    <div className="group relative flex flex-col justify-center items-center overflow-hidden rounded-[16px] bg-white/[0.012] p-3 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.12] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_12px_24px_-6px_rgba(0,0,0,0.4)]">
       {/* Gradient overlay on hover */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
-      {/* Multi-layer depth - inset highlight + outer shadow */}
+      {/* Multi-layer depth */}
       <div className="pointer-events-none absolute inset-0 z-0 rounded-[16px] shadow-[inset_0_1px_2px_rgba(255,255,255,0.05),0_6px_14px_-4px_rgba(0,0,0,0.35)]" />
 
-      {/* Header section - improved readability */}
-      <div className="relative z-10 mb-2.5">
-        <h3 className="mb-1 text-[7.5px] font-bold uppercase tracking-[0.15em] text-neutral-400/75 leading-tight">{title}</h3>
+      {/* Header section - compact */}
+      <div className="relative z-10 w-full mb-auto text-center">
+        <h3 className="text-[7px] font-bold uppercase tracking-[0.15em] text-neutral-400/65 leading-tight mb-0.5">{title}</h3>
         {subtitle && (
-          <p className="text-[9.5px] leading-snug text-neutral-400/85">{subtitle}</p>
+          <p className="text-[8.5px] leading-tight text-neutral-400/75">{subtitle}</p>
         )}
       </div>
 
-      {/* Center visualization area with icon - optimized */}
-      <div className="relative z-10 flex items-center justify-center py-2">
-        <div className="relative flex h-10 w-full items-center justify-center">
-          {/* Decorative crosshair lines - refined */}
-          <div className="absolute h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-          <div className="absolute h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-
-          {/* Decorative dots - subtle with depth */}
-          <div className="absolute left-[20%] top-[15%] size-0.75 rounded-full bg-white/18 ring-0.5 ring-white/8 shadow-[0_1px_2px_rgba(0,0,0,0.15)]" />
-          <div className="absolute bottom-[25%] right-[16%] size-1 rounded-full bg-white/10 ring-0.5 ring-white/5 shadow-[0_1px_2px_rgba(0,0,0,0.1)]" />
-          <div className="absolute right-[26%] top-[30%] size-0.5 rounded-full bg-white/28 shadow-[0_0.5px_1px_rgba(0,0,0,0.1)]" />
-
-          {/* Central icon container - enhanced with depth */}
+      {/* Metric display - PRIMARY FOCUS */}
+      <div className="relative z-10 flex flex-col items-center justify-center py-1.5 flex-1">
+        {/* Small icon positioned subtly at top right of metric area */}
+        <div className="absolute top-0 right-0 opacity-60 transition-opacity duration-500 group-hover:opacity-80">
           <div
             className={cn(
-              "z-10 flex size-7 items-center justify-center rounded-full bg-[#0a0a0a] ring-1 ring-white/10 shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.06),0_3px_8px_-1px_rgba(0,0,0,0.25)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.08),0_5px_12px_-2px_rgba(0,0,0,0.3)]",
+              "flex size-5 items-center justify-center rounded-full bg-white/[0.03] ring-1 ring-white/[0.08] transition-all duration-500",
               statusColors[status]
             )}
           >
-            <Icon className="size-4" strokeWidth={1.5} />
+            <Icon className="size-3" strokeWidth={1.5} />
           </div>
         </div>
-      </div>
 
-      {/* Value display - improved hierarchy */}
-      <div className="relative z-10 mt-2.5 flex items-baseline gap-2">
-        <span className="text-xl font-bold tracking-tight text-white leading-none">{value}</span>
-        {trend && (
-          <span
-            className={cn(
-              "text-[7.5px] font-semibold leading-none",
-              trend.direction === "up" && "text-emerald-400/95",
-              trend.direction === "down" && "text-rose-400/95",
-              trend.direction === "neutral" && "text-neutral-500/70"
-            )}
-          >
-            {trend.value}
-          </span>
-        )}
+        {/* Large, prominent metric value - THE FOCAL POINT */}
+        <div className="flex items-baseline gap-1.5">
+          <span className="text-3xl font-bold tracking-tight text-white leading-none">{value}</span>
+          {trend && (
+            <span
+              className={cn(
+                "text-[7px] font-semibold leading-none",
+                trend.direction === "up" && "text-emerald-400/95",
+                trend.direction === "down" && "text-rose-400/95",
+                trend.direction === "neutral" && "text-neutral-500/65"
+              )}
+            >
+              {trend.value}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   )

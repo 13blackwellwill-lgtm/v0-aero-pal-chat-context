@@ -1,6 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
   UserCheck,
   Wrench,
@@ -9,6 +10,8 @@ import {
   Clock,
   FileText,
   Plane,
+  ChevronRight,
+  Activity,
 } from "lucide-react"
 
 type ActivityType =
@@ -20,7 +23,7 @@ type ActivityType =
   | "note"
   | "arrival"
 
-interface Activity {
+interface ActivityItem {
   id: string
   type: ActivityType
   title: string
@@ -42,7 +45,7 @@ const activityConfig: Record<
   arrival: { icon: Plane, className: "text-emerald-400" },
 }
 
-const activities: Activity[] = [
+const activities: ActivityItem[] = [
   {
     id: "1",
     type: "defect",
@@ -97,37 +100,40 @@ const activities: Activity[] = [
     timestamp: "2 hours ago",
     user: "M. Chen",
   },
+  {
+    id: "8",
+    type: "completed",
+    title: "MEL Cleared",
+    description: "Deferred item cleared on G-ZBKH",
+    timestamp: "3 hours ago",
+    user: "J. Williams",
+  },
 ]
 
-function ActivityItem({ activity }: { activity: Activity }) {
+function ActivityCard({ activity }: { activity: ActivityItem }) {
   const config = activityConfig[activity.type]
   const Icon = config.icon
 
   return (
-    <div className="group flex gap-3 py-3.5 transition-colors duration-200">
-      <div className="relative">
-        {/* Timeline connector */}
-        <div className="absolute left-1/2 top-9 h-[calc(100%+14px)] w-px -translate-x-1/2 bg-gradient-to-b from-white/[0.06] to-transparent" />
-        
-        <div
-          className={cn(
-            "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-white/[0.03] ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-transform duration-300 group-hover:scale-110",
-            config.className
-          )}
-        >
-          <Icon className="size-3.5" strokeWidth={1.5} />
-        </div>
+    <div className="group flex min-w-[280px] gap-3 rounded-xl bg-white/[0.02] p-4 ring-1 ring-white/[0.04] transition-all duration-300 hover:bg-white/[0.04] hover:ring-white/[0.08]">
+      <div
+        className={cn(
+          "flex size-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.03] ring-1 ring-white/[0.06] transition-transform duration-300 group-hover:scale-110",
+          config.className
+        )}
+      >
+        <Icon className="size-4" strokeWidth={1.5} />
       </div>
-      <div className="min-w-0 flex-1 pt-1">
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-neutral-200">
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-sm font-medium text-neutral-200 truncate">
             {activity.title}
           </span>
-          <span className="text-[10px] text-neutral-600">
+          <span className="text-[10px] text-neutral-600 whitespace-nowrap">
             {activity.timestamp}
           </span>
         </div>
-        <p className="mt-1 text-xs leading-relaxed text-neutral-500">
+        <p className="mt-1 text-xs leading-relaxed text-neutral-500 truncate">
           {activity.description}
         </p>
         {activity.user && (
@@ -142,32 +148,47 @@ function ActivityItem({ activity }: { activity: Activity }) {
 
 export function ActivityFeed() {
   return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-[24px] bg-white/[0.015] ring-1 ring-white/[0.04] transition-all duration-500 ease-out hover:bg-white/[0.02] hover:ring-white/[0.08]">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white/[0.015] ring-1 ring-white/[0.04] transition-all duration-500 ease-out hover:bg-white/[0.02] hover:ring-white/[0.08]">
       {/* Gradient overlay on hover */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       
       {/* Inset highlight */}
-      <div className="pointer-events-none absolute inset-0 z-0 rounded-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
+      <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
 
       {/* Header */}
       <div className="relative z-10 flex items-center justify-between border-b border-white/[0.04] px-5 py-4">
-        <h2 className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
-          Recent Activity
-        </h2>
-        <span className="text-[10px] text-neutral-600">Last 24 hours</span>
+        <div className="flex items-center gap-3">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-white/[0.03] ring-1 ring-white/[0.06]">
+            <Activity className="size-4 text-neutral-400" strokeWidth={1.5} />
+          </div>
+          <div>
+            <h2 className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
+              Recent Activity
+            </h2>
+            <p className="text-xs text-neutral-500/80">Last 24 hours</p>
+          </div>
+        </div>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="h-7 rounded-lg text-[10px] uppercase tracking-wider text-neutral-500 hover:bg-white/[0.05] hover:text-neutral-300"
+        >
+          View All
+          <ChevronRight className="ml-1 size-3" strokeWidth={1.5} />
+        </Button>
       </div>
 
-      {/* Activity list */}
-      <div className="relative z-10 flex-1 overflow-y-auto px-5">
-        {activities.map((activity, index) => (
-          <div key={activity.id}>
-            <ActivityItem activity={activity} />
-            {index === activities.length - 1 && (
-              <div className="h-4" /> 
-            )}
-          </div>
-        ))}
+      {/* Horizontal scrolling activity cards */}
+      <div className="relative z-10 flex-1 overflow-x-auto">
+        <div className="flex gap-4 p-5 min-w-max">
+          {activities.map((activity) => (
+            <ActivityCard key={activity.id} activity={activity} />
+          ))}
+        </div>
       </div>
+
+      {/* Scroll fade indicators */}
+      <div className="pointer-events-none absolute right-0 top-[60px] bottom-0 w-16 bg-gradient-to-l from-[#0a0a0c] to-transparent z-20" />
     </div>
   )
 }

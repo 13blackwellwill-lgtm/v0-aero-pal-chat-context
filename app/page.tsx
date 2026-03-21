@@ -1,12 +1,14 @@
-// AeroPal - Live Operations Dashboard v3
+// AeroPal - Live Operations Dashboard
+// Premium aircraft line maintenance engineering and operations platform
+
 import { AppSidebar } from "@/components/app-sidebar"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { KpiCards } from "@/components/dashboard/kpi-cards"
 import { FlightsTable } from "@/components/dashboard/flights-table"
-import { EventCards } from "@/components/dashboard/event-cards"
 import { AlertsPanel } from "@/components/dashboard/alerts-panel"
 import { ActivityFeed } from "@/components/dashboard/activity-feed"
 import { QuickActions } from "@/components/dashboard/quick-actions"
+import { MapPreview } from "@/components/dashboard/map-preview"
 
 export default function DashboardPage() {
   return (
@@ -22,7 +24,7 @@ export default function DashboardPage() {
         {/* Dashboard Content */}
         <main className="flex-1 overflow-y-auto">
           <div className="space-y-6 p-6">
-            {/* Quick Actions */}
+            {/* Quick Actions Row */}
             <div className="flex items-center justify-between">
               <QuickActions />
               <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-neutral-600">
@@ -34,30 +36,31 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* KPI Cards */}
+            {/* KPI Metrics */}
             <KpiCards />
 
-            {/* Main Grid */}
-            <div className="grid grid-cols-1 gap-5 xl:grid-cols-4">
-              {/* Flights Table - Takes 3 columns */}
-              <div className="xl:col-span-3">
+            {/* Main Content Grid */}
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
+              {/* Left Column - Flights Table */}
+              <div className="xl:col-span-8">
                 <FlightsTable />
               </div>
 
-              {/* Right Sidebar - Alerts & Activity */}
-              <div className="flex flex-col gap-5 xl:col-span-1">
-                <div className="h-[420px]">
+              {/* Right Column - Map & Alerts */}
+              <div className="flex flex-col gap-5 xl:col-span-4">
+                {/* Compact Map Preview */}
+                <MapPreview />
+                
+                {/* Alerts Panel */}
+                <div className="h-[380px]">
                   <AlertsPanel />
-                </div>
-                <div className="h-[420px]">
-                  <ActivityFeed />
                 </div>
               </div>
             </div>
 
-            {/* Event Cards - Below Flight Operations */}
-            <div className="pt-2">
-              <EventCards />
+            {/* Activity Feed - Full Width */}
+            <div className="h-[320px]">
+              <ActivityFeed />
             </div>
           </div>
         </main>

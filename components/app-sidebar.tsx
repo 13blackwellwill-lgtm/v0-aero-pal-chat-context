@@ -48,7 +48,7 @@ export function AppSidebar() {
     <aside
       className={cn(
         "group/sidebar relative flex h-screen shrink-0 flex-col overflow-hidden rounded-r-[24px] bg-white/[0.015] ring-1 ring-white/[0.04] transition-all duration-500 ease-out",
-        isCollapsed ? "w-24" : "w-72"
+        isCollapsed ? "w-20" : "w-72"
       )}
     >
       {/* Gradient overlay */}
@@ -80,7 +80,7 @@ export function AppSidebar() {
         {isCollapsed && (
           <button
             onClick={() => setIsCollapsed(false)}
-            className="absolute -right-3 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded-full bg-white/[0.06] text-neutral-400 ring-1 ring-white/[0.1] transition-all duration-500 hover:bg-white/[0.1] hover:text-white"
+            className="absolute -right-4 top-1/2 flex size-6 -translate-y-1/2 items-center justify-center rounded-full bg-white/[0.06] text-neutral-400 ring-1 ring-white/[0.1] transition-all duration-500 hover:bg-white/[0.1] hover:text-white"
           >
             <ChevronRight className="size-3" strokeWidth={2} />
           </button>
@@ -110,12 +110,12 @@ export function AppSidebar() {
       </div>
 
       {/* Main Navigation */}
-      <nav className="relative z-10 flex-1 overflow-y-auto px-5 py-4">
+      <nav className="relative z-10 flex-1 overflow-y-auto px-4 py-3">
         <div className="mb-5">
           <h3 className="mb-3 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
             {isCollapsed ? "" : "Main"}
           </h3>
-          <ul className="space-y-1">
+          <ul className="space-y-0.5">
             {MAIN_NAV.map((item) => {
               const isActive = pathname === item.href || item.subItems?.some(sub => pathname === sub.href)
               const isExpanded = expandedItem === item.name
@@ -127,13 +127,13 @@ export function AppSidebar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex size-14 items-center justify-center rounded-[18px] transition-all duration-500",
+                        "flex size-11 items-center justify-center rounded-[14px] transition-all duration-500",
                         isActive
                           ? "bg-white/[0.06] text-white ring-1 ring-white/[0.1] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
                           : "text-neutral-500 hover:bg-white/[0.04] hover:text-neutral-300 hover:ring-1 hover:ring-white/[0.08]"
                       )}
                     >
-                      <LinkIcon className="size-5" strokeWidth={1.8} />
+                      <LinkIcon className="size-4.5" strokeWidth={1.8} />
                     </Link>
                   ) : (
                     <>
@@ -196,7 +196,7 @@ export function AppSidebar() {
         </div>
 
         {/* Messages Section */}
-        <div className="mt-6">
+        <div className="mt-5">
           <div className="mb-3 flex items-center justify-between px-3">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
               {isCollapsed ? "" : "Messages"}
@@ -207,14 +207,14 @@ export function AppSidebar() {
               </button>
             )}
           </div>
-          <ul className="space-y-1">
+          <ul className="space-y-0.5">
             {MESSAGES.map((message) => (
               <li key={message.name}>
                 {isCollapsed ? (
-                  <div className="flex size-14 items-center justify-center">
+                  <div className="flex size-11 items-center justify-center">
                     <div
                       className={cn(
-                        "flex size-9 items-center justify-center rounded-full text-[10px] font-semibold text-white ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)]",
+                        "flex size-8 items-center justify-center rounded-full text-[9px] font-semibold text-white ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)]",
                         message.color
                       )}
                     >
@@ -244,7 +244,7 @@ export function AppSidebar() {
       </nav>
 
       {/* User Profile Footer */}
-      <div className="relative z-10 px-5 py-4">
+      <div className="relative z-10 px-4 py-3">
         {isCollapsed ? (
           <div className="flex size-12 items-center justify-center">
             <div className="size-10 overflow-hidden rounded-full bg-neutral-700 ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4)]">

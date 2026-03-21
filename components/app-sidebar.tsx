@@ -57,12 +57,12 @@ export function AppSidebar() {
       <div className="pointer-events-none absolute inset-0 z-0 rounded-r-[24px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]" />
 
       {/* Logo Header */}
-      <div className="relative z-10 flex h-24 items-center justify-between px-6">
-        <div className="flex size-14 items-center justify-center rounded-[20px] bg-white/[0.03] ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)] transition-all duration-500 hover:bg-white/[0.05] hover:ring-white/[0.1]">
+      <div className="relative z-10 flex h-20 items-center justify-between px-5">
+        <div className="flex size-12 items-center justify-center rounded-[18px] bg-white/[0.03] ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)] transition-all duration-500 hover:bg-white/[0.05] hover:ring-white/[0.1]">
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            className="size-7 text-neutral-300"
+            className="size-6 text-neutral-300"
             strokeWidth={2.5}
             stroke="currentColor"
           >
@@ -72,7 +72,7 @@ export function AppSidebar() {
         {!isCollapsed && (
           <button
             onClick={() => setIsCollapsed(true)}
-            className="flex size-9 items-center justify-center rounded-xl bg-white/[0.03] text-neutral-500 ring-1 ring-white/[0.06] transition-all duration-500 hover:bg-white/[0.06] hover:text-neutral-300 hover:ring-white/[0.1]"
+            className="flex size-8 items-center justify-center rounded-lg bg-white/[0.03] text-neutral-500 ring-1 ring-white/[0.06] transition-all duration-500 hover:bg-white/[0.06] hover:text-neutral-300 hover:ring-white/[0.1]"
           >
             <ChevronLeft className="size-4" strokeWidth={2} />
           </button>
@@ -88,20 +88,20 @@ export function AppSidebar() {
       </div>
 
       {/* Search Bar */}
-      <div className="relative z-10 px-5 py-3">
+      <div className="relative z-10 px-5 py-2.5">
         {isCollapsed ? (
-          <div className="flex size-14 items-center justify-center rounded-[18px] bg-white/[0.03] text-neutral-500 ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] transition-all duration-500 hover:bg-white/[0.05] hover:text-neutral-300 hover:ring-white/[0.1]">
+          <div className="flex size-12 items-center justify-center rounded-[16px] bg-white/[0.03] text-neutral-500 ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] transition-all duration-500 hover:bg-white/[0.05] hover:text-neutral-300 hover:ring-white/[0.1]">
             <Search className="size-5" strokeWidth={1.8} />
           </div>
         ) : (
-          <div className="flex h-12 items-center gap-3.5 rounded-[18px] bg-white/[0.03] px-4 ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] transition-all duration-500 hover:bg-white/[0.05] hover:ring-white/[0.1]">
-            <Search className="size-4 text-neutral-500" strokeWidth={2} />
-            <span className="flex-1 text-sm text-neutral-500">Search</span>
-            <div className="flex items-center gap-1.5">
-              <kbd className="flex size-6 items-center justify-center rounded-lg bg-white/[0.06] text-[10px] font-medium text-neutral-400 ring-1 ring-white/[0.08]">
-                <Command className="size-3" />
+          <div className="flex h-10 items-center gap-3 rounded-[16px] bg-white/[0.03] px-3.5 ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] transition-all duration-500 hover:bg-white/[0.05] hover:ring-white/[0.1]">
+            <Search className="size-3.5 text-neutral-500" strokeWidth={2} />
+            <span className="flex-1 text-xs text-neutral-500">Search</span>
+            <div className="flex items-center gap-1">
+              <kbd className="flex size-5 items-center justify-center rounded-lg bg-white/[0.06] text-[9px] font-medium text-neutral-400 ring-1 ring-white/[0.08]">
+                <Command className="size-2.5" />
               </kbd>
-              <kbd className="flex size-6 items-center justify-center rounded-lg bg-white/[0.06] text-[10px] font-medium text-neutral-400 ring-1 ring-white/[0.08]">
+              <kbd className="flex size-5 items-center justify-center rounded-lg bg-white/[0.06] text-[9px] font-medium text-neutral-400 ring-1 ring-white/[0.08]">
                 S
               </kbd>
             </div>
@@ -110,12 +110,12 @@ export function AppSidebar() {
       </div>
 
       {/* Main Navigation */}
-      <nav className="relative z-10 flex-1 overflow-y-auto px-5 py-5">
-        <div className="mb-6">
-          <h3 className="mb-4 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
+      <nav className="relative z-10 flex-1 overflow-y-auto px-5 py-4">
+        <div className="mb-5">
+          <h3 className="mb-3 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
             {isCollapsed ? "" : "Main"}
           </h3>
-          <ul className="space-y-1.5">
+          <ul className="space-y-1">
             {MAIN_NAV.map((item) => {
               const isActive = pathname === item.href || item.subItems?.some(sub => pathname === sub.href)
               const isExpanded = expandedItem === item.name
@@ -144,13 +144,13 @@ export function AppSidebar() {
                           }
                         }}
                         className={cn(
-                          "group flex w-full items-center gap-3.5 rounded-[16px] px-4 py-3 text-sm font-semibold transition-all duration-500",
+                          "group flex w-full items-center gap-3 rounded-[14px] px-3.5 py-2.5 text-sm font-semibold transition-all duration-500",
                           isActive
                             ? "bg-white/[0.08] text-white ring-1 ring-white/[0.12] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.06)]"
                             : "text-neutral-400 hover:bg-white/[0.05] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.1] hover:shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
                         )}
                       >
-                        <LinkIcon className="size-5 shrink-0" strokeWidth={2} />
+                        <LinkIcon className="size-4.5 shrink-0" strokeWidth={2} />
                         <span className="flex-1 text-left leading-snug">{item.name}</span>
                         {item.subItems && (
                           <ChevronDown
@@ -165,7 +165,7 @@ export function AppSidebar() {
 
                       {/* Sub Items */}
                       {item.subItems && isExpanded && (
-                        <ul className="relative ml-7 mt-2 space-y-1 border-l border-white/[0.06] pl-5">
+                        <ul className="relative ml-6 mt-1 space-y-0.5 border-l border-white/[0.06] pl-4">
                           {item.subItems.map((subItem) => {
                             const isSubActive = pathname === subItem.href
 
@@ -174,7 +174,7 @@ export function AppSidebar() {
                                 <Link
                                   href={subItem.href}
                                   className={cn(
-                                    "block rounded-[12px] px-4 py-2.5 text-sm font-medium leading-snug transition-all duration-500",
+                                    "block rounded-[10px] px-3 py-2 text-xs font-medium leading-snug transition-all duration-500",
                                     isSubActive
                                       ? "bg-white/[0.08] font-semibold text-white ring-1 ring-white/[0.12] shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
                                       : "text-neutral-500 hover:bg-white/[0.04] hover:text-neutral-300 hover:ring-1 hover:ring-white/[0.08]"
@@ -196,18 +196,18 @@ export function AppSidebar() {
         </div>
 
         {/* Messages Section */}
-        <div className="mt-8">
-          <div className="mb-4 flex items-center justify-between px-3">
+        <div className="mt-6">
+          <div className="mb-3 flex items-center justify-between px-3">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
               {isCollapsed ? "" : "Messages"}
             </h3>
             {!isCollapsed && (
-              <button className="flex size-6 items-center justify-center rounded-lg bg-white/[0.03] text-neutral-500 ring-1 ring-white/[0.06] transition-all duration-500 hover:bg-white/[0.06] hover:text-white hover:ring-white/[0.1]">
-                <Plus className="size-3.5" strokeWidth={2} />
+              <button className="flex size-5 items-center justify-center rounded-lg bg-white/[0.03] text-neutral-500 ring-1 ring-white/[0.06] transition-all duration-500 hover:bg-white/[0.06] hover:text-white hover:ring-white/[0.1]">
+                <Plus className="size-3" strokeWidth={2} />
               </button>
             )}
           </div>
-          <ul className="space-y-1.5">
+          <ul className="space-y-1">
             {MESSAGES.map((message) => (
               <li key={message.name}>
                 {isCollapsed ? (
@@ -224,11 +224,11 @@ export function AppSidebar() {
                 ) : (
                   <Link
                     href="#"
-                    className="flex items-center gap-3.5 rounded-[16px] px-4 py-2.5 text-sm font-medium text-neutral-400 transition-all duration-500 hover:bg-white/[0.05] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.1] hover:shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
+                    className="flex items-center gap-3 rounded-[14px] px-3.5 py-2 text-sm font-medium text-neutral-400 transition-all duration-500 hover:bg-white/[0.05] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.1] hover:shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
                   >
                     <div
                       className={cn(
-                        "flex size-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white ring-1 ring-white/[0.15] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]",
+                        "flex size-8 shrink-0 items-center justify-center rounded-full text-[9px] font-bold text-white ring-1 ring-white/[0.15] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]",
                         message.color
                       )}
                     >
@@ -244,29 +244,29 @@ export function AppSidebar() {
       </nav>
 
       {/* User Profile Footer */}
-      <div className="relative z-10 px-5 py-5">
+      <div className="relative z-10 px-5 py-4">
         {isCollapsed ? (
-          <div className="flex size-14 items-center justify-center">
-            <div className="size-11 overflow-hidden rounded-full bg-neutral-700 ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4)]">
+          <div className="flex size-12 items-center justify-center">
+            <div className="size-10 overflow-hidden rounded-full bg-neutral-700 ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4)]">
               <div className="flex size-full items-center justify-center text-xs font-semibold text-white">
                 JD
               </div>
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-4 rounded-[20px] bg-white/[0.04] px-5 py-4 ring-1 ring-white/[0.08] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.04)] transition-all duration-500 hover:bg-white/[0.07] hover:ring-white/[0.12] hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.3)]">
-            <div className="size-11 overflow-hidden rounded-full bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.12] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.06)]">
+          <div className="flex items-center gap-3 rounded-[18px] bg-white/[0.04] px-4 py-3 ring-1 ring-white/[0.08] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.04)] transition-all duration-500 hover:bg-white/[0.07] hover:ring-white/[0.12] hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.3)]">
+            <div className="size-10 overflow-hidden rounded-full bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.12] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.06)]">
               <div className="flex size-full items-center justify-center text-xs font-bold text-white">
                 JD
               </div>
             </div>
             <div className="flex-1 truncate">
               <p className="truncate text-sm font-semibold leading-snug text-white">John Doe</p>
-              <p className="truncate text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-500/90">
+              <p className="truncate text-[9px] font-medium uppercase tracking-[0.15em] text-neutral-500/90">
                 Designer
               </p>
             </div>
-            <ChevronDown className="size-4 text-neutral-500/80 transition-transform duration-500 group-hover:text-neutral-400" strokeWidth={2} />
+            <ChevronDown className="size-3.5 text-neutral-500/80 transition-transform duration-500 group-hover:text-neutral-400" strokeWidth={2.5} />
           </div>
         )}
       </div>

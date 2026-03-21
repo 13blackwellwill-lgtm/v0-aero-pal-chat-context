@@ -49,15 +49,15 @@ export function AppSidebar() {
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-white/[0.05] bg-gradient-to-b from-white/[0.02] to-black/20 backdrop-blur-sm">
       {/* Logo Header */}
-      <div className="flex h-20 items-center gap-4 border-b border-white/[0.06] px-6 shadow-[inset_0_-1px_0_rgba(255,255,255,0.03)]">
-        <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_0_24px_-4px_rgba(14,165,233,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)]">
+      <div className="flex h-20 items-center gap-4 border-b border-white/[0.08] px-6 shadow-[0_2px_8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.04)]">
+        <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-sky-600 shadow-[0_4px_12px_rgba(14,165,233,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)]">
           <Plane className="size-5 text-white" strokeWidth={1.8} />
         </div>
-        <div className="flex flex-col gap-0.5">
-          <span className="text-base font-bold tracking-tight text-white leading-none">
+        <div className="flex flex-col gap-1">
+          <span className="text-sm font-semibold tracking-tight text-white leading-tight">
             AeroPal
           </span>
-          <span className="text-[9px] font-medium uppercase tracking-widest text-neutral-500">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-neutral-500/90">
             Operations
           </span>
         </div>
@@ -67,7 +67,7 @@ export function AppSidebar() {
       <nav className="flex-1 space-y-8 overflow-y-auto px-4 py-6">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <h3 className="mb-4 px-4 text-[9px] font-bold uppercase tracking-wider text-neutral-500/80 leading-tight">
+            <h3 className="mb-3.5 px-4 text-[10px] font-semibold uppercase tracking-widest text-neutral-500/85 leading-relaxed">
               {group.title}
             </h3>
             <ul className="space-y-2">
@@ -80,10 +80,10 @@ export function AppSidebar() {
                     <Link
                       href={link.href}
                       className={cn(
-                        "group relative flex items-center gap-3.5 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 ease-out",
+                        "group relative flex items-center gap-3.5 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 ease-out",
                         isActive
-                          ? "bg-white/[0.08] text-white ring-1 ring-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.3)]"
-                          : "text-neutral-400 hover:bg-white/[0.04] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.08]"
+                          ? "bg-white/[0.1] text-white ring-1 ring-white/[0.15] shadow-[0_4px_12px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.08)]"
+                          : "text-neutral-400 hover:bg-white/[0.05] hover:text-neutral-200 hover:ring-1 hover:ring-white/[0.1] hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
                       )}
                     >
                       {isActive && (
@@ -107,16 +107,16 @@ export function AppSidebar() {
       </nav>
 
       {/* User Profile Footer */}
-      <div className="border-t border-white/[0.06] bg-gradient-to-t from-white/[0.02] to-transparent px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-        <div className="group flex items-center gap-3 rounded-lg bg-white/[0.03] px-4 py-3.5 ring-1 ring-white/[0.06] transition-all duration-300 hover:bg-white/[0.06] hover:ring-white/[0.1] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_16px_-4px_rgba(0,0,0,0.2)]">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
-            <span className="text-xs font-bold text-white/90">JD</span>
+      <div className="border-t border-white/[0.08] bg-gradient-to-t from-white/[0.02] to-transparent px-4 py-4 shadow-[0_-2px_8px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)]">
+        <div className="group flex items-center gap-3 rounded-lg bg-white/[0.04] px-4 py-3 ring-1 ring-white/[0.08] transition-all duration-200 hover:bg-white/[0.07] hover:ring-white/[0.12] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)]">
+          <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.1] shadow-[0_2px_8px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.04)]">
+            <span className="text-xs font-semibold text-white/95">JD</span>
           </div>
           <div className="flex-1 truncate">
-            <p className="truncate text-sm font-semibold leading-tight text-neutral-100">
+            <p className="truncate text-sm font-semibold leading-snug text-white">
               J. Davidson
             </p>
-            <p className="mt-1 truncate text-[9px] font-medium uppercase tracking-wider text-neutral-500/80">
+            <p className="mt-0.5 truncate text-[10px] font-medium uppercase tracking-wider text-neutral-500/80">
               Duty Engineer
             </p>
           </div>

@@ -112,7 +112,7 @@ export function AppSidebar() {
       {/* Main Navigation */}
       <nav className="relative z-10 flex-1 overflow-y-auto px-5 py-5">
         <div className="mb-6">
-          <h3 className="mb-4 px-3 text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
+          <h3 className="mb-4 px-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
             {isCollapsed ? "" : "Main"}
           </h3>
           <ul className="space-y-1.5">
@@ -144,14 +144,14 @@ export function AppSidebar() {
                           }
                         }}
                         className={cn(
-                          "group flex w-full items-center gap-3.5 rounded-[16px] px-4 py-3 text-sm font-medium transition-all duration-500",
+                          "group flex w-full items-center gap-3.5 rounded-[16px] px-4 py-3 text-sm font-semibold transition-all duration-500",
                           isActive
-                            ? "bg-white/[0.06] text-white ring-1 ring-white/[0.1] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
-                            : "text-neutral-400 hover:bg-white/[0.04] hover:text-neutral-200 hover:ring-1 hover:ring-white/[0.08]"
+                            ? "bg-white/[0.08] text-white ring-1 ring-white/[0.12] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.06)]"
+                            : "text-neutral-400 hover:bg-white/[0.05] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.1] hover:shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
                         )}
                       >
-                        <LinkIcon className="size-5 shrink-0" strokeWidth={1.8} />
-                        <span className="flex-1 text-left leading-relaxed">{item.name}</span>
+                        <LinkIcon className="size-5 shrink-0" strokeWidth={2} />
+                        <span className="flex-1 text-left leading-snug">{item.name}</span>
                         {item.subItems && (
                           <ChevronDown
                             className={cn(
@@ -174,10 +174,10 @@ export function AppSidebar() {
                                 <Link
                                   href={subItem.href}
                                   className={cn(
-                                    "block rounded-[12px] px-4 py-2.5 text-sm leading-relaxed transition-all duration-500",
+                                    "block rounded-[12px] px-4 py-2.5 text-sm font-medium leading-snug transition-all duration-500",
                                     isSubActive
-                                      ? "bg-white/[0.06] font-medium text-white ring-1 ring-white/[0.1]"
-                                      : "text-neutral-500 hover:bg-white/[0.03] hover:text-neutral-300"
+                                      ? "bg-white/[0.08] font-semibold text-white ring-1 ring-white/[0.12] shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
+                                      : "text-neutral-500 hover:bg-white/[0.04] hover:text-neutral-300 hover:ring-1 hover:ring-white/[0.08]"
                                   )}
                                 >
                                   {subItem.name}
@@ -198,7 +198,7 @@ export function AppSidebar() {
         {/* Messages Section */}
         <div className="mt-8">
           <div className="mb-4 flex items-center justify-between px-3">
-            <h3 className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-500">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500/90 leading-relaxed">
               {isCollapsed ? "" : "Messages"}
             </h3>
             {!isCollapsed && (
@@ -224,17 +224,17 @@ export function AppSidebar() {
                 ) : (
                   <Link
                     href="#"
-                    className="flex items-center gap-3.5 rounded-[16px] px-4 py-2.5 text-sm text-neutral-400 transition-all duration-500 hover:bg-white/[0.04] hover:text-white hover:ring-1 hover:ring-white/[0.08]"
+                    className="flex items-center gap-3.5 rounded-[16px] px-4 py-2.5 text-sm font-medium text-neutral-400 transition-all duration-500 hover:bg-white/[0.05] hover:text-neutral-100 hover:ring-1 hover:ring-white/[0.1] hover:shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]"
                   >
                     <div
                       className={cn(
-                        "flex size-9 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)]",
+                        "flex size-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white ring-1 ring-white/[0.15] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)]",
                         message.color
                       )}
                     >
                       {message.avatar}
                     </div>
-                    <span className="leading-relaxed">{message.name}</span>
+                    <span className="leading-snug">{message.name}</span>
                   </Link>
                 )}
               </li>
@@ -254,19 +254,19 @@ export function AppSidebar() {
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-4 rounded-[20px] bg-white/[0.03] px-5 py-4 ring-1 ring-white/[0.06] shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] transition-all duration-500 hover:bg-white/[0.05] hover:ring-white/[0.1] hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.3)]">
-            <div className="size-11 overflow-hidden rounded-full bg-neutral-600 ring-1 ring-white/[0.1] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4)]">
-              <div className="flex size-full items-center justify-center text-xs font-semibold text-white">
+          <div className="flex items-center gap-4 rounded-[20px] bg-white/[0.04] px-5 py-4 ring-1 ring-white/[0.08] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.04)] transition-all duration-500 hover:bg-white/[0.07] hover:ring-white/[0.12] hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.3)]">
+            <div className="size-11 overflow-hidden rounded-full bg-gradient-to-br from-neutral-600 to-neutral-800 ring-1 ring-white/[0.12] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              <div className="flex size-full items-center justify-center text-xs font-bold text-white">
                 JD
               </div>
             </div>
             <div className="flex-1 truncate">
-              <p className="truncate text-sm font-medium leading-relaxed text-white">John Doe</p>
-              <p className="truncate text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-500">
+              <p className="truncate text-sm font-semibold leading-snug text-white">John Doe</p>
+              <p className="truncate text-[10px] font-medium uppercase tracking-[0.15em] text-neutral-500/90">
                 Designer
               </p>
             </div>
-            <ChevronDown className="size-4 text-neutral-500 transition-transform duration-500" strokeWidth={2} />
+            <ChevronDown className="size-4 text-neutral-500/80 transition-transform duration-500 group-hover:text-neutral-400" strokeWidth={2} />
           </div>
         )}
       </div>

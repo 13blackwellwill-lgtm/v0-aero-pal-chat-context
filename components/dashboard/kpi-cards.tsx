@@ -261,7 +261,7 @@ export function KpiCards() {
       </div>
 
       {/* Bottom row: Colored bordered cards - Active AOG, Open Defects, In Flight, Completed Today */}
-      <div className="grid grid-cols-2 gap-5 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         <CriticalKpiCard
           title="Active AOG"
           value={2}

@@ -194,8 +194,74 @@ function UtilisationBar({ available, total }: { available: number; total: number
 export function KpiCards() {
   return (
     <div className="space-y-5">
-      {/* Top row: Critical metrics & Operational metrics - AOG, Open Defects, In Flight, Completed Today */}
-      <div className="grid grid-cols-2 gap-5 lg:grid-cols-6">
+      {/* Top row: Fleet Status, Engineers, Scheduled Today, Turnaround Checks, Avg Response */}
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-5">
+        {/* Fleet Status */}
+        <KpiCard
+          title="Fleet Status"
+          value={47}
+          subtitle="Total aircraft"
+          icon={Plane}
+          status="default"
+        />
+
+        {/* Engineers Available */}
+        <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white/[0.015] p-5 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.08]">
+          <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.04] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]" />
+          
+          <div className="relative z-10 flex items-start justify-between gap-3 mb-3">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 leading-tight">
+                Engineers
+              </h3>
+              <p className="mt-1 text-xs text-neutral-500/80 leading-snug">On shift now</p>
+            </div>
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-white/[0.04] text-sky-400 ring-1 ring-white/[0.08] transition-all duration-500 group-hover:scale-105 group-hover:bg-white/[0.06]">
+              <Users className="size-4" strokeWidth={1.6} />
+            </div>
+          </div>
+          
+          <div className="relative z-10">
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold tracking-tight text-white leading-none">18</span>
+              <span className="text-xs font-medium text-neutral-500">/ 24</span>
+            </div>
+            <UtilisationBar available={18} total={24} />
+          </div>
+        </div>
+
+        {/* Upcoming Maintenance */}
+        <KpiCard
+          title="Scheduled Today"
+          value={15}
+          subtitle="Tasks remaining"
+          icon={Clock}
+          status="default"
+        />
+
+        {/* Turnaround Checks */}
+        <KpiCard
+          title="Turnaround Checks"
+          value={7}
+          subtitle="In progress"
+          icon={Wrench}
+          trend={{ value: "-1", direction: "down" }}
+          status="default"
+        />
+
+        {/* Average Response */}
+        <KpiCard
+          title="Avg Response"
+          value="12m"
+          subtitle="Task assignment"
+          icon={Clock}
+          status="default"
+        />
+      </div>
+
+      {/* Bottom row: Colored bordered cards - Active AOG, Open Defects, In Flight, Completed Today */}
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         <CriticalKpiCard
           title="Active AOG"
           value={2}
@@ -230,72 +296,6 @@ export function KpiCards() {
           icon={CheckCircle2}
           trend={{ value: "+8", direction: "up" }}
           status="success"
-        />
-
-        {/* Engineers Available */}
-        <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white/[0.015] p-5 ring-1 ring-white/[0.05] transition-all duration-500 ease-out hover:-translate-y-1 hover:bg-white/[0.025] hover:ring-white/[0.08]">
-          <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-white/[0.04] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          <div className="pointer-events-none absolute inset-0 z-0 rounded-2xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]" />
-          
-          <div className="relative z-10 flex items-start justify-between gap-3 mb-3">
-            <div className="flex-1 min-w-0">
-              <h3 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 leading-tight">
-                Engineers
-              </h3>
-              <p className="mt-1 text-xs text-neutral-500/80 leading-snug">On shift now</p>
-            </div>
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-white/[0.04] text-sky-400 ring-1 ring-white/[0.08] transition-all duration-500 group-hover:scale-105 group-hover:bg-white/[0.06]">
-              <Users className="size-4" strokeWidth={1.6} />
-            </div>
-          </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold tracking-tight text-white leading-none">18</span>
-              <span className="text-xs font-medium text-neutral-500">/ 24</span>
-            </div>
-            <UtilisationBar available={18} total={24} />
-          </div>
-        </div>
-
-        {/* Fleet Status */}
-        <KpiCard
-          title="Fleet Status"
-          value={47}
-          subtitle="Total aircraft"
-          icon={Plane}
-          status="default"
-        />
-      </div>
-
-      {/* Second row: Remaining metrics */}
-      <div className="grid grid-cols-2 gap-5 lg:grid-cols-3">
-        {/* Turnaround Checks */}
-        <KpiCard
-          title="Turnaround Checks"
-          value={7}
-          subtitle="In progress"
-          icon={Wrench}
-          trend={{ value: "-1", direction: "down" }}
-          status="default"
-        />
-        
-        {/* Upcoming Maintenance */}
-        <KpiCard
-          title="Scheduled Today"
-          value={15}
-          subtitle="Tasks remaining"
-          icon={Clock}
-          status="default"
-        />
-
-        {/* Average Response */}
-        <KpiCard
-          title="Avg Response"
-          value="12m"
-          subtitle="Task assignment"
-          icon={Clock}
-          status="default"
         />
       </div>
     </div>

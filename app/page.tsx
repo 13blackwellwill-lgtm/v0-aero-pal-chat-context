@@ -1,6 +1,3 @@
-// AeroPal - Live Operations Dashboard
-// Premium aircraft line maintenance engineering and operations platform
-
 import { AppSidebar } from "@/components/app-sidebar"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { KpiCards } from "@/components/dashboard/kpi-cards"
@@ -9,6 +6,12 @@ import { AlertsPanel } from "@/components/dashboard/alerts-panel"
 import { ActivityFeed } from "@/components/dashboard/activity-feed"
 import { QuickActions } from "@/components/dashboard/quick-actions"
 import { MapPreview } from "@/components/dashboard/map-preview"
+import { UpcomingMaintenance } from "@/components/dashboard/upcoming-maintenance"
+import { AOGPanel } from "@/components/dashboard/aog-panel"
+import { DefectsPanel } from "@/components/dashboard/defects-panel"
+import { TurnaroundChecks } from "@/components/dashboard/turnaround-checks"
+import { EngineerOperations } from "@/components/dashboard/engineer-operations"
+import { ShiftHandover } from "@/components/dashboard/shift-handover"
 
 export default function DashboardPage() {
   return (
@@ -39,22 +42,60 @@ export default function DashboardPage() {
             {/* KPI Metrics */}
             <KpiCards />
 
-            {/* Main Content Grid */}
-            <div className="grid grid-cols-1 gap-5 xl:grid-cols-12">
-              {/* Left Column - Flights Table */}
-              <div className="xl:col-span-8">
+            {/* Primary Operations Grid - Flights & Map */}
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
+              {/* Left: Flights Table */}
+              <div className="xl:col-span-2">
                 <FlightsTable />
               </div>
 
-              {/* Right Column - Map & Alerts */}
-              <div className="flex flex-col gap-5 xl:col-span-4">
-                {/* Compact Map Preview */}
+              {/* Right: Map Preview */}
+              <div className="xl:col-span-1">
                 <MapPreview />
-                
-                {/* Alerts Panel */}
-                <div className="h-[380px]">
-                  <AlertsPanel />
-                </div>
+              </div>
+            </div>
+
+            {/* Maintenance & Operations Grid */}
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-4">
+              {/* Upcoming Maintenance - spans 2 cols on xl */}
+              <div className="xl:col-span-2">
+                <UpcomingMaintenance />
+              </div>
+
+              {/* AOG Events */}
+              <div className="xl:col-span-1">
+                <AOGPanel />
+              </div>
+
+              {/* Engineer Operations */}
+              <div className="xl:col-span-1">
+                <EngineerOperations />
+              </div>
+            </div>
+
+            {/* Defects & Turnaround Grid */}
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+              {/* Open Defects */}
+              <div className="xl:col-span-1">
+                <DefectsPanel />
+              </div>
+
+              {/* Turnaround Checks */}
+              <div className="xl:col-span-1">
+                <TurnaroundChecks />
+              </div>
+            </div>
+
+            {/* Alerts & Shift Handover Grid */}
+            <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
+              {/* Alerts Panel */}
+              <div className="xl:col-span-1">
+                <AlertsPanel />
+              </div>
+
+              {/* Shift Handover */}
+              <div className="xl:col-span-2">
+                <ShiftHandover />
               </div>
             </div>
 

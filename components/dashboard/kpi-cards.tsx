@@ -194,8 +194,8 @@ function UtilisationBar({ available, total }: { available: number; total: number
 export function KpiCards() {
   return (
     <div className="space-y-5">
-      {/* Top row: Critical metrics - AOG & Open Defects */}
-      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+      {/* Top row: Critical metrics & Operational metrics - AOG, Open Defects, In Flight, Completed Today */}
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-6">
         <CriticalKpiCard
           title="Active AOG"
           value={2}
@@ -211,37 +211,6 @@ export function KpiCards() {
           trend={{ value: "+1 today", direction: "up" }}
           status="warning"
         />
-        
-        {/* Turnaround Checks */}
-        <KpiCard
-          title="Turnaround Checks"
-          value={7}
-          subtitle="In progress"
-          icon={Wrench}
-          trend={{ value: "-1", direction: "down" }}
-          status="default"
-        />
-        
-        {/* Upcoming Maintenance */}
-        <KpiCard
-          title="Scheduled Today"
-          value={15}
-          subtitle="Tasks remaining"
-          icon={Clock}
-          status="default"
-        />
-      </div>
-
-      {/* Bottom row: Operational metrics */}
-      <div className="grid grid-cols-2 gap-5 lg:grid-cols-5">
-        {/* Fleet Status */}
-        <KpiCard
-          title="Fleet Status"
-          value={47}
-          subtitle="Total aircraft"
-          icon={Plane}
-          status="default"
-        />
 
         {/* In Flight */}
         <KpiCard
@@ -250,6 +219,16 @@ export function KpiCards() {
           subtitle="Currently airborne"
           icon={TrendingUp}
           trend={{ value: "+2", direction: "up" }}
+          status="success"
+        />
+
+        {/* Tasks Completed */}
+        <KpiCard
+          title="Completed Today"
+          value={34}
+          subtitle="Tasks finished"
+          icon={CheckCircle2}
+          trend={{ value: "+8", direction: "up" }}
           status="success"
         />
 
@@ -279,14 +258,35 @@ export function KpiCards() {
           </div>
         </div>
 
-        {/* Tasks Completed */}
+        {/* Fleet Status */}
         <KpiCard
-          title="Completed Today"
-          value={34}
-          subtitle="Tasks finished"
-          icon={CheckCircle2}
-          trend={{ value: "+8", direction: "up" }}
-          status="success"
+          title="Fleet Status"
+          value={47}
+          subtitle="Total aircraft"
+          icon={Plane}
+          status="default"
+        />
+      </div>
+
+      {/* Second row: Remaining metrics */}
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-3">
+        {/* Turnaround Checks */}
+        <KpiCard
+          title="Turnaround Checks"
+          value={7}
+          subtitle="In progress"
+          icon={Wrench}
+          trend={{ value: "-1", direction: "down" }}
+          status="default"
+        />
+        
+        {/* Upcoming Maintenance */}
+        <KpiCard
+          title="Scheduled Today"
+          value={15}
+          subtitle="Tasks remaining"
+          icon={Clock}
+          status="default"
         />
 
         {/* Average Response */}
